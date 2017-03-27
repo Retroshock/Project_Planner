@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.adrian.git.Date.Eveniment;
+import com.example.adrian.git.Date.EvenimentDinamic;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.adrian.git.Date;
 
 import android.location.Location;
+import android.support.annotation.NonNull;
 
 import java.util.Date;
 
@@ -10,7 +11,7 @@ import javax.xml.datatype.Duration;
  * Created by Adrian on 26.03.2017.
  */
 
-public class Eveniment {
+public class Eveniment implements Comparable<Eveniment> {
 
     private Date startDate, endDate;
 
@@ -61,5 +62,8 @@ public class Eveniment {
     }
 
 
-
+    @Override
+    public int compareTo(@NonNull Eveniment o) {
+        return startDate.compareTo(o.getStartDate());
+    }
 }
