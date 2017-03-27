@@ -8,8 +8,10 @@ import javax.xml.datatype.Duration;
  * Created by Adrian on 26.03.2017.
  */
 
-public class ActivitateDinamica extends Activitate {
+public class EvenimentDinamic extends Eveniment {
+
     private Duration duration ;
+
     private Date deadline = new Date();
 
     public Duration getDuration() {
