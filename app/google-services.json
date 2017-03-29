@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "592538970942",
+    "project_id": "plannerproject-162711"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592538970942:android:48b49bee8356872e",
+        "android_client_info": {
+          "package_name": "com.example.adrian.git"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592538970942-ucg3lpjf7mghnqv3g9fjregh6h11um2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.adrian.git",
+            "certificate_hash": "14d5840fbbdf94f893bc64c3d6ed31380cb1b5ed"
+          }
+        },
+        {
+          "client_id": "592538970942-ivgbjt0rr2t3t5ttv3fmjqn31m0rdgrd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwz3-GVrHCj7qmKEhJ-FfUuvTFguR8Vco"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

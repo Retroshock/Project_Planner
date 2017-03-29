@@ -64,6 +64,7 @@ public class InputConfirmFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         boolean t = b.getBoolean(AddActivity.TYPE_KEY);
+        nume.setText(b.getString(AddActivity.NAME_KEY));
         if(!t)
         {
             dyn1.setText(R.string.tv2_add_act);

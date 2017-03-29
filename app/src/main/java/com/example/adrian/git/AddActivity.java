@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import com.example.adrian.git.Date.Activitate;
 import com.example.adrian.git.Date.ActivitateDinamica;
 import com.example.adrian.git.Date.ActivitateStatica;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Calendar;
@@ -33,6 +33,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class AddActivity extends AppCompatActivity
         implements DurationPickerFragment.DurationPickerListener, InputConfirmFragment.InputConfirmListener{
 
+    private boolean stDate1Set = false;
+    private boolean stDate2Set = false;
+    private boolean endDate1Set = false;
+    private boolean endDate2Set = false;
+    private boolean deadline1Set = false;
+    private boolean deadline2Set = false;
+    private boolean durationSet = false;
     private int stDate[];
     private int endDate[];
     private int deadline[];
@@ -46,7 +53,7 @@ public class AddActivity extends AppCompatActivity
     public static final String DURATION_KEY = "duration";
     public static final String NAME_KEY = "name";
     public static final String TYPE_KEY = "type";
-    public static final String REZULTAT_ACTIVITATE = "rezultat";
+    public static final String REZULTAT_ACTIVITATE = "com.example.adrian.git.Rezultat";
 
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -105,24 +112,23 @@ public class AddActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment inputConfirm = new InputConfirmFragment();
-                Bundle b = new Bundle();
-                if(!dinamic.isChecked())
-                {
-                    b.putString(NAME_KEY, nume.getText().toString());
-                    b.putIntArray(ST_DATE_KEY, stDate);
-                    b.putIntArray(END_DATE_KEY, endDate);
-                    b.putBoolean(TYPE_KEY, false);
+                if(stDate1Set && stDate2Set && endDate1Set && endDate2Set && durationSet && deadline1Set && deadline2Set) {
+                    DialogFragment inputConfirm = new InputConfirmFragment();
+                    Bundle b = new Bundle();
+                    if (!dinamic.isChecked()) {
+                        b.putString(NAME_KEY, nume.getText().toString());
+                        b.putIntArray(ST_DATE_KEY, stDate);
+                        b.putIntArray(END_DATE_KEY, endDate);
+                        b.putBoolean(TYPE_KEY, false);
+                    } else {
+                        b.putString(NAME_KEY, nume.getText().toString());
+                        b.putIntArray(DURATION_KEY, duration);
+                        b.putIntArray(DEADLINE_KEY, deadline);
+                        b.putBoolean(TYPE_KEY, true);
+                    }
+                    inputConfirm.setArguments(b);
+                    inputConfirm.show(getFragmentManager(), "Confirm?");
                 }
-                else
-                {
-                    b.putString(NAME_KEY, nume.getText().toString());
-                    b.putIntArray(DURATION_KEY, duration);
-                    b.putIntArray(DEADLINE_KEY, deadline);
-                    b.putBoolean(TYPE_KEY, true);
-                }
-                inputConfirm.setArguments(b);
-                inputConfirm.show(getFragmentManager(), "Confirm?");
             }
         });
     }
@@ -131,6 +137,7 @@ public class AddActivity extends AppCompatActivity
     public void onDurationPickerPositiveClick(DialogFragment dialog, int hours, int minutes) {
         duration[0] = hours;
         duration[1] = minutes;
+        durationSet = true;
     }
 
     @Override
@@ -146,6 +153,11 @@ public class AddActivity extends AppCompatActivity
             Activitate a = new ActivitateStatica();
             int stDate[] = b.getIntArray(ST_DATE_KEY);
             int endDate[] = b.getIntArray(END_DATE_KEY);
+            if(stDate == null || endDate == null)
+            {
+                Toast.makeText(getApplicationContext(), "Start date sau end date null", Toast.LENGTH_LONG).show();
+                return;
+            }
             String name = b.getString(NAME_KEY);
             Calendar start = new GregorianCalendar(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4]);
             Calendar end = new GregorianCalendar(endDate[0], endDate[1], endDate[2], endDate[3], endDate[4]);
@@ -153,7 +165,7 @@ public class AddActivity extends AppCompatActivity
             a.setEndDate(end);
             a.setName(name);
             Intent result = new Intent();
-            result.putExtra(REZULTAT_ACTIVITATE, (Serializable) a);
+            result.putExtra(REZULTAT_ACTIVITATE, (Parcelable) a);
             setResult(RESULT_OK, result);
             finish();
         }
@@ -162,6 +174,11 @@ public class AddActivity extends AppCompatActivity
             ActivitateDinamica a = new ActivitateDinamica();
             int duration[] = b.getIntArray(DURATION_KEY);
             int deadline[] = b.getIntArray(DEADLINE_KEY);
+            if(duration == null || deadline == null)
+            {
+                Toast.makeText(getApplicationContext(), "Duration sau deadline null", Toast.LENGTH_LONG).show();
+                return;
+            }
             String name = b.getString(NAME_KEY);
             DatatypeFactory df = new DatatypeFactory() {
                 @Override
@@ -205,7 +222,7 @@ public class AddActivity extends AppCompatActivity
             a.setDuration(dura);
             a.setDeadline(dead);
             Intent result = new Intent();
-            result.putExtra(REZULTAT_ACTIVITATE, (Serializable) a);
+            result.putExtra(REZULTAT_ACTIVITATE, (Parcelable) a);
             setResult(RESULT_OK, result);
             finish();
         }
@@ -250,6 +267,7 @@ public class AddActivity extends AppCompatActivity
                 stDate[2] = dayOfMonth;
                 stDate[1] = month;
                 stDate[0] = year;
+                stDate1Set = true;
                 break;
             }
             case R.id.endDtAddAct:
@@ -257,6 +275,7 @@ public class AddActivity extends AppCompatActivity
                 endDate[2] = dayOfMonth;
                 endDate[1] = month;
                 endDate[0] = year;
+                endDate1Set = true;
                 break;
             }
             case R.id.dlDtAddAct:
@@ -264,6 +283,7 @@ public class AddActivity extends AppCompatActivity
                 deadline[2] = dayOfMonth;
                 deadline[1] = month;
                 deadline[0] = year;
+                deadline1Set = true;
                 break;
             }
             default:
@@ -279,18 +299,21 @@ public class AddActivity extends AppCompatActivity
             {
                 stDate[3] = hour;
                 stDate[4] = minute;
+                stDate2Set = true;
                 break;
             }
             case R.id.endTmAddAct:
             {
                 endDate[3] = hour;
                 endDate[4] = minute;
+                endDate2Set = true;
                 break;
             }
             case R.id.dlTmAddAct:
             {
                 deadline[3] = hour;
                 deadline[4] = minute;
+                deadline2Set = true;
                 break;
             }
             default:
