@@ -17,9 +17,9 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.adrian.git.Date.Activitate;
-import com.example.adrian.git.Date.ActivitateDinamica;
-import com.example.adrian.git.Date.ActivitateStatica;
+import com.example.adrian.git.Date.Eveniment;
+import com.example.adrian.git.Date.EvenimentDinamic;
+import com.example.adrian.git.Date.EvenimentStatic;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -53,7 +53,7 @@ public class AddActivity extends AppCompatActivity
     public static final String DURATION_KEY = "duration";
     public static final String NAME_KEY = "name";
     public static final String TYPE_KEY = "type";
-    public static final String REZULTAT_ACTIVITATE = "com.example.adrian.git.Rezultat";
+    public static final String REZULTAT_Eveniment = "com.example.adrian.git.Rezultat";
 
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -150,7 +150,7 @@ public class AddActivity extends AppCompatActivity
         boolean tip = b.getBoolean(TYPE_KEY);
         if(!tip)
         {
-            Activitate a = new ActivitateStatica();
+            Eveniment a = new EvenimentStatic();
             int stDate[] = b.getIntArray(ST_DATE_KEY);
             int endDate[] = b.getIntArray(END_DATE_KEY);
             if(stDate == null || endDate == null)
@@ -165,13 +165,13 @@ public class AddActivity extends AppCompatActivity
             a.setEndDate(end);
             a.setName(name);
             Intent result = new Intent();
-            result.putExtra(REZULTAT_ACTIVITATE, (Parcelable) a);
+            result.putExtra(REZULTAT_Eveniment, (Parcelable) a);
             setResult(RESULT_OK, result);
             finish();
         }
         else
         {
-            ActivitateDinamica a = new ActivitateDinamica();
+            EvenimentDinamic a = new EvenimentDinamic();
             int duration[] = b.getIntArray(DURATION_KEY);
             int deadline[] = b.getIntArray(DEADLINE_KEY);
             if(duration == null || deadline == null)
@@ -222,7 +222,7 @@ public class AddActivity extends AppCompatActivity
             a.setDuration(dura);
             a.setDeadline(dead);
             Intent result = new Intent();
-            result.putExtra(REZULTAT_ACTIVITATE, (Parcelable) a);
+            result.putExtra(REZULTAT_Eveniment, (Parcelable) a);
             setResult(RESULT_OK, result);
             finish();
         }
