@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Adrian on 27.03.2017.
  */
 
-public class Calendar {
+public class MyCalendar {
     private ArrayList <Eveniment> normalEvnts;
 
     private ArrayList <EvenimentDinamic> dinamicEvnts;
