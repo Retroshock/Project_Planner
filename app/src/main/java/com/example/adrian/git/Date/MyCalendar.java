@@ -16,14 +16,14 @@ public class MyCalendar {
 
     public boolean addEvent(Eveniment ev){
         if (ev instanceof EvenimentStatic) {
-            if (isCollision(normalEvnts, ev) && isValid(ev)) {
+            if (!isCollision(normalEvnts, ev) && isValid(ev)) {
                 staticEvnts.add((EvenimentStatic) ev);
                 normalEvnts.add(ev);
                 return true;
             }
         }
         if (ev instanceof EvenimentDinamic){
-            if (isCollision(normalEvnts, ev) && isValid(ev)) {
+            if (!isCollision(normalEvnts, ev) && isValid(ev)) {
                 dinamicEvnts.add((EvenimentDinamic) ev);
                 normalEvnts.add(ev);
                 return true;
