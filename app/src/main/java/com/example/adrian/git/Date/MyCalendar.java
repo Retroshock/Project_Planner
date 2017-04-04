@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Adrian on 27.03.2017.
  */
 
-public class Calendar {
+public class MyCalendar {
     private ArrayList <Eveniment> normalEvnts;
 
     private ArrayList <EvenimentDinamic> dinamicEvnts;
@@ -16,14 +16,14 @@ public class Calendar {
 
     public boolean addEvent(Eveniment ev){
         if (ev instanceof EvenimentStatic) {
-            if (isCollision(normalEvnts, ev) && isValid(ev)) {
+            if (!isCollision(normalEvnts, ev) && isValid(ev)) {
                 staticEvnts.add((EvenimentStatic) ev);
                 normalEvnts.add(ev);
                 return true;
             }
         }
         if (ev instanceof EvenimentDinamic){
-            if (isCollision(normalEvnts, ev) && isValid(ev)) {
+            if (!isCollision(normalEvnts, ev) && isValid(ev)) {
                 dinamicEvnts.add((EvenimentDinamic) ev);
                 normalEvnts.add(ev);
                 return true;
