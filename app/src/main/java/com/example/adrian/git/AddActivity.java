@@ -47,13 +47,14 @@ public class AddActivity extends AppCompatActivity
     private EditText nume;
     private CheckBox dinamic;
     private static final String ID_KEY = "id";
-    public static final String ST_DATE_KEY = "startDate";
-    public static final String END_DATE_KEY = "endDate";
-    public static final String DEADLINE_KEY = "deadline";
-    public static final String DURATION_KEY = "duration";
-    public static final String NAME_KEY = "name";
-    public static final String TYPE_KEY = "type";
-    public static final String REZULTAT_Eveniment = "com.example.adrian.git.Rezultat";
+    public static final String ST_DATE_KEY = "com.example.adrian.git.startDate";
+    public static final String END_DATE_KEY = "com.example.adrian.git.endDate";
+    public static final String DEADLINE_KEY = "com.example.adrian.git.deadline";
+    public static final String DURATION_KEY = "com.example.adrian.git.duration";
+    public static final String NAME_KEY = "com.example.adrian.git.name";
+    public static final String TYPE_KEY = "com.example.adrian.git.type";
+    public static final String OBLIGATORIU_KEY = "com.example.adrian.git.obligatoriu";
+    //public static final String REZULTAT_Eveniment = "com.example.adrian.git.Rezultat";
 
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -146,8 +147,8 @@ public class AddActivity extends AppCompatActivity
     }
 
     @Override
-    public void onInputConfirmPositiveClick(DialogFragment dialog, Bundle b) {
-        boolean tip = b.getBoolean(TYPE_KEY);
+    public void onInputConfirmPositiveClick(DialogFragment dialog, Bundle b, boolean obl) {
+        /*boolean tip = b.getBoolean(TYPE_KEY);
         if(!tip)
         {
             Eveniment a = new EvenimentStatic();
@@ -225,7 +226,12 @@ public class AddActivity extends AppCompatActivity
             result.putExtra(REZULTAT_Eveniment, (Parcelable) a);
             setResult(RESULT_OK, result);
             finish();
-        }
+        }*/
+        b.putBoolean(OBLIGATORIU_KEY, obl);
+        Intent rezultat = new Intent();
+        rezultat.putExtras(b);
+        setResult(RESULT_OK, rezultat);
+        finish();
     }
 
     @Override

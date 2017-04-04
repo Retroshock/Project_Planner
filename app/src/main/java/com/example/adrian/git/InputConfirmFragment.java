@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class InputConfirmFragment extends DialogFragment {
@@ -20,10 +21,11 @@ public class InputConfirmFragment extends DialogFragment {
     private TextView dyn2;
     private TextView dyn3;
     private TextView dyn4;
+    private CheckBox obl;
     private Bundle b;
 
     public interface InputConfirmListener {
-        void onInputConfirmPositiveClick(DialogFragment dialog, Bundle b);
+        void onInputConfirmPositiveClick(DialogFragment dialog, Bundle b, boolean obl);
         void onInputConfirmNegativeClick(DialogFragment dialog);
     }
 
@@ -42,12 +44,13 @@ public class InputConfirmFragment extends DialogFragment {
         dyn2 = (TextView) v.findViewById(R.id.dyn2InputConfirmFrag);
         dyn3 = (TextView) v.findViewById(R.id.dyn3InputConfirmFrag);
         dyn4 = (TextView) v.findViewById(R.id.dyn4InputConfirmFrag);
+        obl = (CheckBox) v.findViewById(R.id.oblInputConfirmFrag);
         b = getArguments();
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                inputListener.onInputConfirmPositiveClick(InputConfirmFragment.this, b);
+                inputListener.onInputConfirmPositiveClick(InputConfirmFragment.this, b, obl.isChecked());
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

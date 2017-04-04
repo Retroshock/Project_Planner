@@ -12,10 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv1_add_act"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/numeInputConfirmFrag"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/numeInputConfirmFrag"
@@ -30,10 +30,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv4_add_act"
-        app:layout_constraintBottom_toTopOf="@+id/dyn1InputConfirmFrag"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/tipInputConfirmFrag"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintBottom_toTopOf="@+id/dyn1InputConfirmFrag" />
 
     <TextView
         android:id="@+id/tipInputConfirmFrag"
@@ -47,10 +47,11 @@
         android:id="@+id/dyn1InputConfirmFrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/dyn2InputConfirmFrag"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/dyn3InputConfirmFrag"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/dyn2InputConfirmFrag"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:layout_constraintVertical_bias="0.51" />
 
     <TextView
         android:id="@+id/dyn3InputConfirmFrag"
@@ -64,10 +65,11 @@
         android:id="@+id/dyn2InputConfirmFrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/dyn4InputConfirmFrag"
-        app:layout_constraintTop_toBottomOf="@+id/dyn1InputConfirmFrag" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/dyn1InputConfirmFrag"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/dyn4InputConfirmFrag"
@@ -76,4 +78,24 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/dyn2InputConfirmFrag"
         app:layout_constraintLeft_toRightOf="@+id/dyn2InputConfirmFrag"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/obligatoriu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/oblInputConfirmFrag"
+        app:layout_constraintTop_toBottomOf="@+id/dyn2InputConfirmFrag"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <CheckBox
+        android:id="@+id/oblInputConfirmFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/textView10" />
 </android.support.constraint.ConstraintLayout>
