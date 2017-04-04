@@ -15,6 +15,10 @@ public class Eveniment implements Comparable<Eveniment> {
 
     private Date startDate, endDate;
 
+    private Date startHour, endHour;
+
+    Weekday weekDay;
+
     private String name;
 
     private Location locatie;
@@ -49,6 +53,22 @@ public class Eveniment implements Comparable<Eveniment> {
         return endDate;
     }
 
+    public Date getStartHour() {
+        return startHour;
+    }
+
+    public void setStartHour(Date startHour) {
+        this.startHour = startHour;
+    }
+
+    public Date getEndHour() {
+        return endHour;
+    }
+
+    public void setEndHour(Date endHour) {
+        this.endHour = endHour;
+    }
+
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
@@ -61,6 +81,13 @@ public class Eveniment implements Comparable<Eveniment> {
         this.name = name;
     }
 
+    public Weekday getWeekDay() {
+        return weekDay;
+    }
+
+    public void setWeekDay(Weekday weekDay) {
+        this.weekDay = weekDay;
+    }
 
     @Override
     public int compareTo(@NonNull Eveniment o) {
