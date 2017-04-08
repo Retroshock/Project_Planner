@@ -1,6 +1,6 @@
 package com.example.adrian.git.Date;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.xml.datatype.Duration;
 
@@ -12,7 +12,7 @@ public class EvenimentDinamic extends Eveniment {
 
     private Duration duration ;
 
-    private Date deadline = new Date();
+    private Calendar deadline;
 
     public Duration getDuration() {
         return duration;
@@ -22,11 +22,11 @@ public class EvenimentDinamic extends Eveniment {
         this.duration = duration;
     }
 
-    public Date getDeadline() {
+    public Calendar getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(Calendar deadline) {
         this.deadline = deadline;
     }
 

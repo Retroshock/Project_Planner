@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.adrian.git.AddActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv1_add_act"
+        app:layout_constraintBaseline_toBaselineOf="@+id/numeAddAct"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline" />
+
+    <EditText
+        android:id="@+id/numeAddAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="@string/nume_hint_add_act"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/stDtAddAct"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv2_add_act"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stDtAddAct"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv3_add_act"
+        app:layout_constraintBaseline_toBaselineOf="@+id/endDtAddAct"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline" />
+
+    <Button
+        android:id="@+id/stDtAddAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/but_data_add_act"
+        app:layout_constraintBottom_toTopOf="@+id/endDtAddAct"
+        app:layout_constraintRight_toLeftOf="@+id/stTmAddAct"
+        app:layout_constraintTop_toBottomOf="@+id/numeAddAct"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:onClick="pickDate"/>
+
+    <Button
+        android:id="@+id/stTmAddAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/but_ora_add_act"
+        app:layout_constraintBaseline_toBaselineOf="@+id/stDtAddAct"
+        app:layout_constraintLeft_toRightOf="@+id/stDtAddAct"
+        app:layout_constraintRight_toRightOf="parent"
+        android:onClick="pickTime"/>
+
+    <Button
+        android:id="@+id/endDtAddAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/but_data_add_act"
+        app:layout_constraintBottom_toTopOf="@+id/dinamicAddAct"
+        app:layout_constraintRight_toLeftOf="@+id/endTmAddAct"
+        app:layout_constraintTop_toBottomOf="@+id/stDtAddAct"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        android:layout_marginStart="8dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:onClick="pickDate"/>
+
+    <Button
+        android:id="@+id/endTmAddAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/but_ora_add_act"
+        app:layout_constraintBaseline_toBaselineOf="@+id/endDtAddAct"
+        app:layout_constraintLeft_toRightOf="@+id/endDtAddAct"
+        app:layout_constraintRight_toRightOf="parent"
+        android:onClick="pickTime"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv4_add_act"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dinamicAddAct"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline" />
+
+    <CheckBox
+        android:id="@+id/dinamicAddAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/dinamic_add_act"
+        app:layout_constraintBottom_toTopOf="@+id/durationAddAct"
+        app:layout_constraintTop_toBottomOf="@+id/endDtAddAct"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/numeAddAct"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/numeAddAct" />
+
+    <Button
+        android:id="@+id/durationAddAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/durata_add_act"
+        app:layout_constraintBottom_toTopOf="@+id/dlDtAddAct"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="@+id/numeAddAct"
+        app:layout_constraintRight_toRightOf="@+id/numeAddAct"
+        app:layout_constraintTop_toBottomOf="@+id/dinamicAddAct"
+        android:layout_marginEnd="8dp"
+        android:onClick="pickDuration"/>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv5_add_act"
+        app:layout_constraintBaseline_toBaselineOf="@+id/durationAddAct"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv6_add_act"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dlDtAddAct"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline" />
+
+    <Button
+        android:id="@+id/dlDtAddAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/but_data_add_act"
+        app:layout_constraintRight_toLeftOf="@+id/dlTmAddAct"
+        app:layout_constraintTop_toBottomOf="@+id/durationAddAct"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        android:layout_marginStart="8dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:onClick="pickDate"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2" />
+
+    <Button
+        android:id="@+id/dlTmAddAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/but_ora_add_act"
+        app:layout_constraintBaseline_toBaselineOf="@+id/dlDtAddAct"
+        app:layout_constraintLeft_toRightOf="@+id/dlDtAddAct"
+        app:layout_constraintRight_toRightOf="parent"
+        android:onClick="pickTime"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="96dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabAddAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:elevation="4dp"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline2"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="69dp" />
+
+</android.support.constraint.ConstraintLayout>
