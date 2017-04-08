@@ -38,8 +38,15 @@ public class DurationPickerFragment extends DialogFragment {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                int h = Integer.parseInt(hours.getText().toString());
-                int m = Integer.parseInt(minutes.getText().toString());
+                int h, m;
+                if(hours.getText().toString().isEmpty())
+                    h = 0;
+                else
+                    h = Integer.parseInt(hours.getText().toString());
+                if(minutes.getText().toString().isEmpty())
+                    m = 0;
+                else
+                    m = Integer.parseInt(minutes.getText().toString());
                 durationListener.onDurationPickerPositiveClick(DurationPickerFragment.this, h, m);
             }
         });
@@ -51,11 +58,6 @@ public class DurationPickerFragment extends DialogFragment {
             }
         });
         return builder.create();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return null;
     }
 
     @Override
