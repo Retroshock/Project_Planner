@@ -15,12 +15,6 @@ import android.widget.TextView;
 
 public class InputConfirmFragment extends DialogFragment {
 
-    private TextView nume;
-    private TextView tip;
-    private TextView dyn1;
-    private TextView dyn2;
-    private TextView dyn3;
-    private TextView dyn4;
     private CheckBox obl;
     private Bundle b;
 
@@ -36,36 +30,16 @@ public class InputConfirmFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.fragment_duration_picker, null);
+        View v = inflater.inflate(R.layout.fragment_input_confirm, null);
         builder.setView(v);
-        nume = (TextView) v.findViewById(R.id.numeInputConfirmFrag);
-        tip = (TextView) v.findViewById(R.id.tipInputConfirmFrag);
-        dyn1 = (TextView) v.findViewById(R.id.dyn1InputConfirmFrag);
-        dyn2 = (TextView) v.findViewById(R.id.dyn2InputConfirmFrag);
-        dyn3 = (TextView) v.findViewById(R.id.dyn3InputConfirmFrag);
-        dyn4 = (TextView) v.findViewById(R.id.dyn4InputConfirmFrag);
+        TextView nume = (TextView) v.findViewById(R.id.numeInputConfirmFrag);
+        TextView tip = (TextView) v.findViewById(R.id.tipInputConfirmFrag);
+        TextView dyn1 = (TextView) v.findViewById(R.id.dyn1InputConfirmFrag);
+        TextView dyn2 = (TextView) v.findViewById(R.id.dyn2InputConfirmFrag);
+        TextView dyn3 = (TextView) v.findViewById(R.id.dyn3InputConfirmFrag);
+        TextView dyn4 = (TextView) v.findViewById(R.id.dyn4InputConfirmFrag);
         obl = (CheckBox) v.findViewById(R.id.oblInputConfirmFrag);
         b = getArguments();
-        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                inputListener.onInputConfirmPositiveClick(InputConfirmFragment.this, b, obl.isChecked());
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                inputListener.onInputConfirmNegativeClick(InputConfirmFragment.this);
-            }
-        });
-        return builder.create();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
         boolean t = b.getBoolean(AddActivity.TYPE_KEY);
         nume.setText(b.getString(AddActivity.NAME_KEY));
         if(!t)
@@ -87,12 +61,26 @@ public class InputConfirmFragment extends DialogFragment {
             int duration[] = b.getIntArray(AddActivity.DURATION_KEY);
             int deadline[] = b.getIntArray(AddActivity.DEADLINE_KEY);
             tip.setText("Dynamic");
-            String dura = "" + duration[0] + " hours and " + duration[1] + "minutes";
+            String dura = "" + duration[0] + " hours and " + duration[1] + " minutes";
             String dead = "" +  deadline[0] + "." + deadline[1] + "." + deadline[2] + " " + deadline[3] + ":" + deadline[4];
             dyn3.setText(dura);
             dyn4.setText(dead);
         }
-        return null;
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                inputListener.onInputConfirmPositiveClick(InputConfirmFragment.this, b, obl.isChecked());
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                inputListener.onInputConfirmNegativeClick(InputConfirmFragment.this);
+            }
+        });
+        return builder.create();
     }
 
     @Override

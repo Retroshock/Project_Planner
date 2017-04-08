@@ -260,7 +260,7 @@ public class AddActivity extends AppCompatActivity
     }
     public void pickDuration(View v)
     {
-        DialogFragment dialog = new TimePickerFragment();
+        DialogFragment dialog = new DurationPickerFragment();
         dialog.show(getFragmentManager(), "Pick the duration");
     }
 
