@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="inputActionBar">#f5f5f5</color>
+    <color name="culoareIulia2">#EFF9FA</color>
+    <color name="culoareIulia3">#EFEFEF</color>
+    <color name="culoareIulia1">#FCFCFC</color>
 </resources>
