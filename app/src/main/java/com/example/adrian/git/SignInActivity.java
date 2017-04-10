@@ -3,6 +3,7 @@ package com.example.adrian.git;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,7 +31,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView profilePicture;
     private TextView name;
     private TextView email;
-    private RelativeLayout profileSection;
+    private ConstraintLayout profileSection;
     private SignInButton signInButton;
     private GoogleApiClient googleApiClient;
     private static final int REQ_CODE = 9001;
@@ -50,7 +51,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         name = (TextView) findViewById(R.id.Nume);
         email = (TextView) findViewById(R.id.Email);
        // profilePicture = (ImageView) findViewById(R.id.AccountPicture);
-        profileSection = (RelativeLayout) findViewById(R.id.Credentials);
+        profileSection = (ConstraintLayout) findViewById(R.id.Credentials);
         profileSection.setVisibility(View.GONE);
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().build();
@@ -96,10 +97,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             GoogleSignInAccount account = result.getSignInAccount();
             String nume = account.getDisplayName();
             String mail = account.getEmail();
-            String imgURL = account.getPhotoUrl().toString();
+           // String imgURL = account.getPhotoUrl().toString();
             name.setText(nume);
             email.setText(mail);
-            Glide.with(this).load(imgURL).into(profilePicture);
+           // Glide.with(this).load(imgURL).into(profilePicture);
             updateUI(true);
         }
         else
