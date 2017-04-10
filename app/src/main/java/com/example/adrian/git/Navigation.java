@@ -84,13 +84,13 @@ public class Navigation extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        android.app.FragmentManager fragmentManager = getFragmentManager();
         if (id == R.id.nav_day) {
-            // Handle the camera action
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new DayFragment()).commit();
         } else if (id == R.id.nav_week) {
-
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new WeekFragment()).commit();
         } else if (id == R.id.nav_month) {
-
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new MonthFragment()).commit();
         } else if (id == R.id.nav_logout) {
 
         }
