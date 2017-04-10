@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -29,7 +30,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private ImageView profilePicture;
     private TextView name;
     private TextView email;
-    private LinearLayout profileSection;
+    private RelativeLayout profileSection;
     private SignInButton signInButton;
     private GoogleApiClient googleApiClient;
     private static final int REQ_CODE = 9001;
@@ -48,9 +49,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         logOutButton = (Button) findViewById(R.id.Logout);
         name = (TextView) findViewById(R.id.Nume);
         email = (TextView) findViewById(R.id.Email);
-        profilePicture = (ImageView) findViewById(R.id.AccountPicture);
-        profileSection = (LinearLayout) findViewById(R.id.Credentials);
-        //profileSection.setVisibility(View.GONE);
+       // profilePicture = (ImageView) findViewById(R.id.AccountPicture);
+        profileSection = (RelativeLayout) findViewById(R.id.Credentials);
+        profileSection.setVisibility(View.GONE);
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().build();
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this)
@@ -106,11 +107,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
     private void updateUI(boolean isLogin){
         if (isLogin){
-            profileSection.setVisibility(View.VISIBLE);
+            //profileSection.setVisibility(View.VISIBLE);
             signInButton.setVisibility(View.GONE);
         }
         else{
-            profileSection.setVisibility(View.GONE);
+           // profileSection.setVisibility(View.GONE);
             signInButton.setVisibility(View.VISIBLE);
         }
     }

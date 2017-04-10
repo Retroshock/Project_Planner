@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_day"
+            android:icon="@drawable/day"
+            android:title="@string/day" />
+
+        <item
+            android:id="@+id/nav_week"
+            android:icon="@drawable/week"
+            android:title="@string/week" />
+
+        <item
+            android:id="@+id/nav_month"
+            android:icon="@drawable/month"
+            android:title="@string/month" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="@string/logout" />
+    </group>
+
+
+
+</menu>

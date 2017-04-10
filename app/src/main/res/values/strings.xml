@@ -15,4 +15,12 @@
     <string name="hours_duration_dial_frag">Hours:</string>
     <string name="minutes_duration_dial_frag">Minutes:</string>
     <string name="obligatoriu">Obligatoriu</string>
+    <string name="title_activity_navigation">Navigation</string>
+    <string name="day">Day</string>
+    <string name="month">Week</string>
+    <string name="week">Month</string>
+    <string name="logout">Log out</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
