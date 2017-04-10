@@ -63,15 +63,15 @@
         android:id="@+id/stDtAddAct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:onClick="pickDate"
         android:text="@string/but_data_add_act"
         app:layout_constraintBottom_toTopOf="@+id/endDtAddAct"
-        app:layout_constraintRight_toLeftOf="@+id/stTmAddAct"
-        app:layout_constraintTop_toBottomOf="@+id/numeAddAct"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline"
         app:layout_constraintHorizontal_chainStyle="packed"
-        android:onClick="pickDate"/>
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintRight_toLeftOf="@+id/stTmAddAct"
+        app:layout_constraintTop_toBottomOf="@+id/numeAddAct" />
 
     <Button
         android:id="@+id/stTmAddAct"
