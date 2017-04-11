@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Git.iml" filepath="$PROJECT_DIR$/Git.iml" />
       <module fileurl="file://$PROJECT_DIR$/Project_Planner.iml" filepath="$PROJECT_DIR$/Project_Planner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
