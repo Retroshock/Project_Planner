@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.adrian.git.AddActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarAddAct"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/inputActionBar"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <EditText
+        android:id="@+id/numeAddAct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/culoareIulia2"
+        android:ems="10"
+        android:hint="@string/nume_hint_add_act"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/dataAddAct"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/guideDr"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAddAct" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/dataAddAct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/culoareIulia3"
+        app:layout_constraintBottom_toTopOf="@+id/locatieAddAct"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/guideDr"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numeAddAct">
+
+        <TextView
+            android:id="@+id/stDateAddAct"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/st_date_add_act"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/endDateAddAct"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/endDateAddAct"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
+            android:text="@string/end_date_add_act"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/stDateAddAct"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.556" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/locatieAddAct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/culoareIulia1"
+        android:text="@string/location_add_act"
+        app:layout_constraintBottom_toTopOf="@+id/obligatoriuAddAct"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/guideDr"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataAddAct" />
+
+    <CheckBox
+        android:id="@+id/obligatoriuAddAct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/culoareIulia2"
+        android:text="@string/obligatoriu_add_act"
+        app:layout_constraintBottom_toTopOf="@+id/staticAddAct"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/guideDr"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locatieAddAct" />
+
+    <CheckBox
+        android:id="@+id/staticAddAct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/culoareIulia3"
+        android:text="@string/static_add_act"
+        app:layout_constraintBottom_toTopOf="@+id/notificatieAddAct"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/guideDr"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/obligatoriuAddAct" />
+
+    <CheckBox
+        android:id="@+id/notificatieAddAct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/culoareIulia1"
+        android:text="@string/notificare_add_act"
+        app:layout_constraintBottom_toTopOf="@+id/notaAddAct"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/guideDr"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/staticAddAct" />
+
+    <EditText
+        android:id="@+id/notaAddAct"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/culoareIulia2"
+        android:ems="10"
+        android:hint="@string/nota_add_act"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/guideDr"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notificatieAddAct" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideSt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.14" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideDr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.16"
+        tools:layout_editor_absoluteX="62dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ImageView
+        android:id="@+id/linieAddAct"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:minWidth="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/guideSt"
+        app:layout_constraintRight_toLeftOf="@+id/guideDr"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/line_1" />
+
+    <ImageView
+        android:id="@+id/numeImgAddAct"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_view_add_act"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/numeAddAct"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideSt"
+        app:layout_constraintTop_toTopOf="@+id/numeAddAct"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/nume" />
+
+    <ImageView
+        android:id="@+id/dataImgAddAct"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_view_add_act"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dataAddAct"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideSt"
+        app:layout_constraintTop_toTopOf="@+id/dataAddAct"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/timp" />
+
+    <ImageView
+        android:id="@+id/locatieImgAddAct"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_view_add_act"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/locatieAddAct"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideSt"
+        app:layout_constraintTop_toTopOf="@+id/locatieAddAct"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/locatie" />
+
+    <ImageView
+        android:id="@+id/obligatoriuImgAddAct"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_view_add_act"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/obligatoriuAddAct"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideSt"
+        app:layout_constraintTop_toTopOf="@+id/obligatoriuAddAct"
+        app:srcCompat="@drawable/stea" />
+
+    <ImageView
+        android:id="@+id/staticImgAddAct"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_view_add_act"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/staticAddAct"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideSt"
+        app:layout_constraintTop_toTopOf="@+id/staticAddAct"
+        app:srcCompat="@drawable/movie"
+        android:layout_marginRight="8dp" />
+
+    <ImageView
+        android:id="@+id/notificatieImgAddAct"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_view_add_act"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/notificatieAddAct"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideSt"
+        app:layout_constraintTop_toTopOf="@+id/notificatieAddAct"
+        app:srcCompat="@drawable/mail" />
+
+    <ImageView
+        android:id="@+id/notaImgAddAct"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_view_add_act"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/notaAddAct"
+        app:layout_constraintDimensionRatio="w,1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideSt"
+        app:layout_constraintTop_toTopOf="@+id/notaAddAct"
+        app:srcCompat="@drawable/nota" />
+
+</android.support.constraint.ConstraintLayout>

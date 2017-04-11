@@ -1,4 +1,33 @@
 <resources>
     <string name="app_name">Git</string>
     <string name="action_settings">Settings</string>
+    <string name="nume_hint_add_act">Activity name</string>
+    <string name="but_data_add_act">Date</string>
+    <string name="but_ora_add_act">Hour</string>
+    <string name="dinamic_add_act">Dynamic activity</string>
+    <string name="durata_add_act">Duration</string>
+    <string name="tv1_add_act">Name:</string>
+    <string name="tv2_add_act">Start date:</string>
+    <string name="tv3_add_act">End date:</string>
+    <string name="tv4_add_act">Type:</string>
+    <string name="tv5_add_act">Duration:</string>
+    <string name="tv6_add_act">Deadline:</string>
+    <string name="hours_duration_dial_frag">Hours:</string>
+    <string name="minutes_duration_dial_frag">Minutes:</string>
+    <string name="obligatoriu">Obligatoriu</string>
+    <string name="title_activity_navigation">Navigation</string>
+    <string name="day">Day</string>
+    <string name="month">Month</string>
+    <string name="week">Week</string>
+    <string name="logout">Log out</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="st_date_add_act">Start date</string>
+    <string name="end_date_add_act">End date</string>
+    <string name="location_add_act">Location</string>
+    <string name="obligatoriu_add_act">Obligatoriu</string>
+    <string name="static_add_act">Static</string>
+    <string name="notificare_add_act">Notifications</string>
+    <string name="nota_add_act">Add a note for the activity here</string>
 </resources>
