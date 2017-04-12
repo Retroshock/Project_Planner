@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Adrian on 08.04.2017.
@@ -23,22 +24,30 @@ class DatabaseQuery extends DatabaseObject{
     public List<EventObjects> getAllFutureEvents() {
         Date dateToday = new Date ();
         List<EventObjects> events = new ArrayList<>();
-        String query = "select * from reminder";
-        Cursor cursor = this.getDbConnection().rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                int id = cursor.getInt(0);
-                String message = cursor.getString(cursor.getColumnIndexOrThrow("message"));
-                String startDate = cursor.getString(cursor.getColumnIndexOrThrow("start_date"));
-                //convert start date to date object
-                Date reminderDate = convertStringToDate(startDate);
-                if (reminderDate.after(dateToday) || reminderDate.equals(dateToday)) {
-                    events.add(new EventObjects(id, message, reminderDate));
-                }
-            } while (cursor.moveToNext());
-        }
+        String query = "select * from reminders";
+        try {
+            Cursor cursor = getDbConnection().rawQuery(query, null);
+
+
+            if (cursor.moveToFirst()) {
+                do {
+                    int id = cursor.getInt(0);
+                    String message = cursor.getString(cursor.getColumnIndexOrThrow("message"));
+                    String startDate = cursor.getString(cursor.getColumnIndexOrThrow("start_date"));
+                    //convert start date to date object
+                    Date reminderDate = convertStringToDate(startDate);
+                    if (reminderDate.after(dateToday) || reminderDate.equals(dateToday)) {
+                        events.add(new EventObjects(id, message, reminderDate));
+                    }
+                } while (cursor.moveToNext());
+            }
             cursor.close();
             return events;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private Date convertStringToDate(String dateInString) {

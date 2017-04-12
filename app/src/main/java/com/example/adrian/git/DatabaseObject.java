@@ -12,8 +12,9 @@ public class DatabaseObject {
     private SQLiteDatabase db;
     public DatabaseObject (Context context) {
         dbHelper = new Database(context);
-        this.dbHelper.getWritableDatabase();
+        dbHelper.getWritableDatabase();
         this.db = dbHelper.getReadableDatabase();
+//        dbHelper.onCreate(this.getDbConnection());
     }
     public SQLiteDatabase getDbConnection (){
         return this.db;
