@@ -35,7 +35,7 @@ public class CalendarCustomView extends LinearLayout {
     private static final int MAX_CALENDAR_COLUMN = 42;
     private int month, year;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
-    private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+    private Calendar cal = Calendar.getInstance();
     private Context context;
     private GridAdapter mAdapter;
     private DatabaseQuery mQuery;
@@ -94,7 +94,7 @@ public class CalendarCustomView extends LinearLayout {
         //List <EventObjects> mEvents = new ArrayList<>();
         Calendar mCal = (Calendar)cal.clone();
         mCal.set(Calendar.DAY_OF_MONTH, 1);
-        int firstDayOfTheMonth = mCal.get(Calendar.DAY_OF_WEEK) ;
+        int firstDayOfTheMonth = mCal.get(Calendar.DAY_OF_WEEK) -2 ;
         mCal.add(Calendar.DAY_OF_MONTH, -firstDayOfTheMonth);
         while (dayValueInCells.size() < MAX_CALENDAR_COLUMN){
             dayValueInCells.add(mCal.getTime());
