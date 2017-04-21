@@ -31,7 +31,8 @@
         app:layout_constraintBottom_toTopOf="@+id/stDtAddAct"
         app:layout_constraintLeft_toLeftOf="@+id/guideline"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAddAct"
+        app:layout_constraintHorizontal_bias="0.5" />
 
     <TextView
         android:id="@+id/textView2"
@@ -131,7 +132,8 @@
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="@+id/numeAddAct"
         android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/numeAddAct" />
+        app:layout_constraintLeft_toLeftOf="@+id/numeAddAct"
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/durationAddAct"
@@ -142,7 +144,6 @@
         android:layout_marginStart="8dp"
         android:text="@string/durata_add_act"
         app:layout_constraintBottom_toTopOf="@+id/dlDtAddAct"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="@+id/numeAddAct"
         app:layout_constraintRight_toRightOf="@+id/numeAddAct"
         app:layout_constraintTop_toBottomOf="@+id/dinamicAddAct"
@@ -187,7 +188,6 @@
         android:layout_marginStart="8dp"
         app:layout_constraintHorizontal_chainStyle="packed"
         android:onClick="pickDate"
-        android:layout_marginTop="0dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2" />
 
@@ -208,7 +208,7 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.25"
         tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="96dp" />
+        tools:layout_editor_absoluteX="90dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabAddAct"
@@ -223,14 +223,32 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.5"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:layout_marginEnd="8dp" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/guideline2"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="69dp" />
+        app:layout_constraintGuide_end="69dp"
+        tools:layout_editor_absoluteY="498dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarAddAct"
+        android:layout_width="0dp"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/inputActionBar"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 </android.support.constraint.ConstraintLayout>
