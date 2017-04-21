@@ -25,10 +25,9 @@ class DatabaseQuery extends DatabaseObject{
         Date dateToday = new Date ();
         List<EventObjects> events = new ArrayList<>();
         String query = "select * from reminders";
+        //TODO  - DE MODIFICAT CA SA SELECTEZE CE NE TREBUIE -
         try {
             Cursor cursor = getDbConnection().rawQuery(query, null);
-
-
             if (cursor.moveToFirst()) {
                 do {
                     int id = cursor.getInt(0);
