@@ -1,12 +1,5 @@
 package com.example.adrian.git.Exceptions;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-
-import com.example.adrian.git.MainActivity;
-
 /**
  * Created by Adrian on 03.04.2017.
  */

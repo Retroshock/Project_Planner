@@ -57,15 +57,15 @@ public class MyCalendar {
             }
         });
 
-        long timeDifference = ev.getDeadline().getTime() - currDate.getTime();
-        if (timeDifference <= 0){
-            return false;
-        }
-        for (int i=0 ; i<normalEvnts.size(); i++)
-
-
-
-        addDynamicEvent(startHour, endHour, ev);
+//        long timeDifference = ev.getDeadline().getTime() - currDate.getTime();
+//        if (timeDifference <= 0){
+//            return false;
+//        }
+//        for (int i=0 ; i<normalEvnts.size(); i++)
+//
+//
+//
+//        addDynamicEvent(startHour, endHour, ev);
         return  false;
 
     }
