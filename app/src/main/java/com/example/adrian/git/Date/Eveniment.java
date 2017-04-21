@@ -3,7 +3,7 @@ package com.example.adrian.git.Date;
 import android.location.Location;
 import android.support.annotation.NonNull;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.xml.datatype.Duration;
 
@@ -13,7 +13,7 @@ import javax.xml.datatype.Duration;
 
 public class Eveniment implements Comparable<Eveniment> {
 
-    private Calendar startDate, endDate;
+    private Date startDate, endDate;
 
     private String name;
 
@@ -37,19 +37,19 @@ public class Eveniment implements Comparable<Eveniment> {
         this.locatie = locatie;
     }
 
-    public Calendar getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Calendar startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Calendar getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Calendar endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
