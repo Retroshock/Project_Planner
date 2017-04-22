@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Git</string>
+    <string name="app_name">AI PLAN</string>
     <string name="action_settings">Settings</string>
     <string name="nume_hint_add_act">Activity name</string>
     <string name="but_data_add_act">Date</string>
@@ -15,6 +15,18 @@
     <string name="hours_duration_dial_frag">Hours:</string>
     <string name="minutes_duration_dial_frag">Minutes:</string>
     <string name="obligatoriu">Obligatoriu</string>
+    <string name="current_date">April, 2017</string>
+    <string name="add_event">ADD CALENDAR EVENT</string>
+    <string name="sun">SUN</string>
+    <string name="mon">MON</string>
+    <string name="tue">TUE</string>
+    <string name="wed">WED</string>
+    <string name="thu">THU</string>
+    <string name="fri">FRI</string>
+    <string name="sat">SAT</string>
+    <string name="last_date">30</string>
+
+
     <string name="title_activity_navigation">Navigation</string>
     <string name="day">Day</string>
     <string name="month">Month</string>
