@@ -57,7 +57,7 @@ public class MyCalendar {
             }
         });
 
-        long timeDifference = ev.getDeadline().getTime() - currDate.getTime();
+        long timeDifference = ev.getDeadline().getTime().getTime() - currDate.getTime();
         if (timeDifference <= 0){
             return false;
         }
