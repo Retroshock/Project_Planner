@@ -19,6 +19,7 @@ public class WeekFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.week_layout, container, false);
+        //myView = inflater.inflate(R.layout.fragment_week, container, false);
         return myView;
     }
 }
