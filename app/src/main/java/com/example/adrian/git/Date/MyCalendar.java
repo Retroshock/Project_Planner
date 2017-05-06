@@ -98,4 +98,28 @@ public class MyCalendar {
             return false;
         return true;
     }
+
+    public ArrayList<Eveniment> getNormalEvnts() {
+        return normalEvnts;
+    }
+
+    public void setNormalEvnts(ArrayList<Eveniment> normalEvnts) {
+        this.normalEvnts = normalEvnts;
+    }
+
+    public ArrayList<EvenimentDinamic> getDinamicEvnts() {
+        return dinamicEvnts;
+    }
+
+    public void setDinamicEvnts(ArrayList<EvenimentDinamic> dinamicEvnts) {
+        this.dinamicEvnts = dinamicEvnts;
+    }
+
+    public ArrayList<EvenimentStatic> getStaticEvnts() {
+        return staticEvnts;
+    }
+
+    public void setStaticEvnts(ArrayList<EvenimentStatic> staticEvnts) {
+        this.staticEvnts = staticEvnts;
+    }
 }
