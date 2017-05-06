@@ -63,6 +63,11 @@ public class Eveniment implements Comparable<Eveniment> {
         this.name = name;
     }
 
+    public String getLocationToString (){
+        if (this.locatie == null)
+            return "";
+        return Location.convert(locatie.getLatitude(), Location.FORMAT_DEGREES) + " " + Location.convert(locatie.getLongitude(), Location.FORMAT_DEGREES);
+    }
 
     @Override
     public int compareTo(@NonNull Eveniment o) {

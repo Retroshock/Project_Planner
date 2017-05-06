@@ -19,12 +19,14 @@ import java.io.OutputStream;
 
 public class Database extends SQLiteOpenHelper {
 
-    private static final String SQL_DELETE_ENTRIES ="DROP TABLE IF EXISTS reminders" ;
+    private static final String SQL_DELETE_ENTRIES ="DROP TABLE IF EXISTS evenimente" ;
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE reminders" + " (" +
-                    "id" + " INTEGER PRIMARY KEY," +
-                    "message" + " TEXT," +
-                    "start_date" + " TEXT)";
+            "CREATE TABLE evenimente" + " (" + "nume" + " TEXT, " +
+                    "startDate" + " DATETIME, " +
+                    "endDate" + " DATETIME, " +
+                    "id" + " INTEGER, " +
+                    "locatie" + " TEXT " +
+                    ")";
     private static final String DATABASE_NAMES = "events";
     private static final int DATABASE_VERSION = 3;
 

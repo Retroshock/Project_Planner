@@ -8,17 +8,17 @@ import java.util.Date;
 
 class EventObjects {
     private int id;
-    private String message;
+    private String nume;
     private Date date;
 
-    public EventObjects (String message, Date date){
-        this.message = message;
+    public EventObjects (String nume, Date date){
+        this.nume = nume;
         this.date = date;
     }
 
-    public EventObjects(int id, String message, Date reminderDate) {
+    public EventObjects(int id, String nume, Date reminderDate) {
         this.date = reminderDate;
-        this.message = message;
+        this.nume = nume;
         this.id = id;
     }
 
@@ -26,8 +26,8 @@ class EventObjects {
         return id;
     }
 
-    public String getMessage(){
-        return message;
+    public String getNume(){
+        return nume;
     }
 
     public Date getDate() {
