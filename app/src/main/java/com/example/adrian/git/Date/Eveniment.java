@@ -15,6 +15,8 @@ public class Eveniment implements Comparable<Eveniment> {
 
     private Date startDate, endDate;
 
+    private long ID ;
+
     private String name;
 
     private Location locatie;
@@ -61,9 +63,18 @@ public class Eveniment implements Comparable<Eveniment> {
         this.name = name;
     }
 
+    public String getLocationToString (){
+        if (this.locatie == null)
+            return "";
+        return Location.convert(locatie.getLatitude(), Location.FORMAT_DEGREES) + " " + Location.convert(locatie.getLongitude(), Location.FORMAT_DEGREES);
+    }
 
     @Override
     public int compareTo(@NonNull Eveniment o) {
         return startDate.compareTo(o.getStartDate());
+    }
+
+    public long getID() {
+        return ID;
     }
 }

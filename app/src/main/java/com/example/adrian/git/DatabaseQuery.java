@@ -24,20 +24,19 @@ class DatabaseQuery extends DatabaseObject{
     public List<EventObjects> getAllFutureEvents() {
         Date dateToday = new Date ();
         List<EventObjects> events = new ArrayList<>();
-        String query = "select * from reminders";
+        String query = "select * from evenimente";
+        //TODO  - DE MODIFICAT CA SA SELECTEZE CE NE TREBUIE -
         try {
             Cursor cursor = getDbConnection().rawQuery(query, null);
-
-
             if (cursor.moveToFirst()) {
                 do {
                     int id = cursor.getInt(0);
-                    String message = cursor.getString(cursor.getColumnIndexOrThrow("message"));
-                    String startDate = cursor.getString(cursor.getColumnIndexOrThrow("start_date"));
+                    String nume = cursor.getString(cursor.getColumnIndexOrThrow("nume"));
+                    String startDate = cursor.getString(cursor.getColumnIndexOrThrow("startDate"));
                     //convert start date to date object
                     Date reminderDate = convertStringToDate(startDate);
                     if (reminderDate.after(dateToday) || reminderDate.equals(dateToday)) {
-                        events.add(new EventObjects(id, message, reminderDate));
+                        events.add(new EventObjects(id, nume, reminderDate));
                     }
                 } while (cursor.moveToNext());
             }

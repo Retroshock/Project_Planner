@@ -30,6 +30,8 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import static com.example.adrian.git.BundleKeys.*;
+
 public class AddActivity extends AppCompatActivity
         implements DurationPickerFragment.DurationPickerListener, InputConfirmFragment.InputConfirmListener{
 
@@ -47,13 +49,7 @@ public class AddActivity extends AppCompatActivity
     private EditText nume;
     private CheckBox dinamic;
     private static final String ID_KEY = "id";
-    public static final String ST_DATE_KEY = "com.example.adrian.git.startDate";
-    public static final String END_DATE_KEY = "com.example.adrian.git.endDate";
-    public static final String DEADLINE_KEY = "com.example.adrian.git.deadline";
-    public static final String DURATION_KEY = "com.example.adrian.git.duration";
-    public static final String NAME_KEY = "com.example.adrian.git.name";
-    public static final String TYPE_KEY = "com.example.adrian.git.type";
-    public static final String OBLIGATORIU_KEY = "com.example.adrian.git.obligatoriu";
+
     //public static final String REZULTAT_Eveniment = "com.example.adrian.git.Rezultat";
 
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
@@ -148,10 +144,12 @@ public class AddActivity extends AppCompatActivity
 
     @Override
     public void onInputConfirmPositiveClick(DialogFragment dialog, Bundle b, boolean obl) {
-        /*boolean tip = b.getBoolean(TYPE_KEY);
+        boolean tip = b.getBoolean(TYPE_KEY);
+        //TODO de adaugat id-uri la fiecare eveniment in parte - Robert
+
         if(!tip)
         {
-            Eveniment a = new EvenimentStatic();
+            Eveniment evStatic = new EvenimentStatic();
             int stDate[] = b.getIntArray(ST_DATE_KEY);
             int endDate[] = b.getIntArray(END_DATE_KEY);
             if(stDate == null || endDate == null)
@@ -162,17 +160,18 @@ public class AddActivity extends AppCompatActivity
             String name = b.getString(NAME_KEY);
             Calendar start = new GregorianCalendar(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4]);
             Calendar end = new GregorianCalendar(endDate[0], endDate[1], endDate[2], endDate[3], endDate[4]);
-            a.setStartDate(start);
-            a.setEndDate(end);
-            a.setName(name);
-            Intent result = new Intent();
-            result.putExtra(REZULTAT_Eveniment, (Parcelable) a);
-            setResult(RESULT_OK, result);
-            finish();
+            evStatic.setStartDate(start.getTime());
+            evStatic.setEndDate(end.getTime());
+            evStatic.setName(name);
+            AddEventToDatabase evToDb = new AddEventToDatabase(evStatic, this.getApplicationContext());
+
         }
         else
         {
-            EvenimentDinamic a = new EvenimentDinamic();
+            /*TODO AIci trebuie sa creeze o instanta a unei clase de management al evenimentelor dinamice
+                Astea nu se adauga direct in BD, ci se trimit catre clasa aia ^
+            */
+            EvenimentDinamic evDinamic = new EvenimentDinamic();
             int duration[] = b.getIntArray(DURATION_KEY);
             int deadline[] = b.getIntArray(DEADLINE_KEY);
             if(duration == null || deadline == null)
@@ -219,20 +218,22 @@ public class AddActivity extends AppCompatActivity
             };
             Duration dura = df.newDuration(true, 0, 0, 0, duration[0], duration[1], 0);
             Calendar dead = new GregorianCalendar(deadline[0], deadline[1], deadline[2], deadline[3], deadline[4]);
-            a.setName(name);
-            a.setDuration(dura);
-            a.setDeadline(dead);
-            Intent result = new Intent();
-            result.putExtra(REZULTAT_Eveniment, (Parcelable) a);
-            setResult(RESULT_OK, result);
-            finish();
-        }*/
+            evDinamic.setName(name);
+            evDinamic.setDuration(dura);
+            evDinamic.setDeadline(dead.getTime());
+            //AddEventToDatabase evToDb = new AddEventToDatabase(evDinamic, this.getApplicationContext());
+
+        }
+
+
+
         b.putBoolean(OBLIGATORIU_KEY, obl);
-        Intent rezultat = new Intent();
-        rezultat.putExtras(b);
-        setResult(RESULT_OK, rezultat);
+
+
         finish();
     }
+
+
 
     @Override
     public void onInputConfirmNegativeClick(DialogFragment dialog) {
