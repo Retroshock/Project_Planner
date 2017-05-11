@@ -48,6 +48,7 @@ public class AddActivity extends AppCompatActivity {
             implements DatePickerDialog.OnDateSetListener {
 
         boolean b1, b2;
+        Bundle b;
 
         private class MyDatePickerDialog extends DatePickerDialog
         {
@@ -70,7 +71,7 @@ public class AddActivity extends AppCompatActivity {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            Bundle b = getArguments();
+            b = getArguments();
             b1 = b.getBoolean(BOOL1);
             b2 = b.getBoolean(BOOL2);
             int year, month, day;
@@ -94,7 +95,7 @@ public class AddActivity extends AppCompatActivity {
 
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            ((AddActivity) getActivity()).alegeData(year, month, dayOfMonth, b1, b2);
+            ((AddActivity) getActivity()).alegeData(year, month, dayOfMonth, b1, b2, b);
         }
     }
 
@@ -127,9 +128,19 @@ public class AddActivity extends AppCompatActivity {
             Bundle b = getArguments();
             b1 = b.getBoolean(BOOL1);
             b2 = b.getBoolean(BOOL2);
-            final Calendar c = Calendar.getInstance();
-            int hour = c.get(Calendar.HOUR_OF_DAY);
-            int minute = c.get(Calendar.MINUTE);
+            int hour, minute;
+            int[] data = b.getIntArray(DATA_KEY);
+            if(data != null)
+            {
+                hour = data[3];
+                minute = data[4];
+            }
+            else
+            {
+                final Calendar c = Calendar.getInstance();
+                hour = c.get(Calendar.HOUR_OF_DAY);
+                minute = c.get(Calendar.MINUTE);
+            }
             return new MyTimePickerDialog(getActivity(), this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
         }
@@ -237,7 +248,7 @@ public class AddActivity extends AppCompatActivity {
                 endDate.setText(R.string.end_date2_add_act);
             else
             {
-                String text = "Until " + Integer.toString(deadline[2]) + "." + Integer.toString(deadline[1])
+                String text = "Until " + Integer.toString(deadline[2]) + "." + Integer.toString(deadline[1] + 1)
                         + "." + Integer.toString(deadline[0]) + " " + Integer.toString(deadline[3])
                         + ":" + Integer.toString(deadline[4]);
                 endDate.setText(text);
@@ -251,7 +262,7 @@ public class AddActivity extends AppCompatActivity {
                 stDate.setText(R.string.st_date_add_act);
             else
             {
-                String text = "From " + Integer.toString(start[2]) + "." + Integer.toString(start[1])
+                String text = "From " + Integer.toString(start[2]) + "." + Integer.toString(start[1] + 1)
                         + "." + Integer.toString(start[0]) + " " + Integer.toString(start[3])
                         + ":" + Integer.toString(start[4]);
                 stDate.setText(text);
@@ -260,7 +271,7 @@ public class AddActivity extends AppCompatActivity {
                 endDate.setText(R.string.end_date_add_act);
             else
             {
-                String text = "To " + Integer.toString(end[2]) + "." + Integer.toString(end[1])
+                String text = "To " + Integer.toString(end[2]) + "." + Integer.toString(end[1] + 1)
                         + "." + Integer.toString(end[0]) + " " + Integer.toString(end[3])
                         + ":" + Integer.toString(end[4]);
                 endDate.setText(text);
@@ -340,7 +351,7 @@ public class AddActivity extends AppCompatActivity {
         //TODO Sa adaug locatia in UI dupa ce e setata - frontend
     }
 
-    public void alegeData(int an, int luna, int zi, boolean b1, boolean b2)
+    public void alegeData(int an, int luna, int zi, boolean b1, boolean b2, Bundle b3)
     {
         if(!b1 && !b2)
         {
@@ -367,6 +378,7 @@ public class AddActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putBoolean(BOOL1, b1);
         b.putBoolean(BOOL2, b2);
+        b.putAll(b3);
         dialog.setArguments(b);
         dialog.show(getFragmentManager(), "Pick the time");
     }
@@ -377,7 +389,7 @@ public class AddActivity extends AppCompatActivity {
         {
             start[3] = ore;
             start[4] = minute;
-            String text = "From " + Integer.toString(start[2]) + "." + Integer.toString(start[1])
+            String text = "From " + Integer.toString(start[2]) + "." + Integer.toString(start[1] + 1)
                     + "." + Integer.toString(start[0]) + " " + Integer.toString(start[3])
                     + ":" + Integer.toString(start[4]);
             stDate.setText(text);
@@ -386,7 +398,7 @@ public class AddActivity extends AppCompatActivity {
         {
             end[3] = ore;
             end[4] = minute;
-            String text = "To " + Integer.toString(end[2]) + "." + Integer.toString(end[1])
+            String text = "To " + Integer.toString(end[2]) + "." + Integer.toString(end[1] + 1)
                     + "." + Integer.toString(end[0]) + " " + Integer.toString(end[3])
                     + ":" + Integer.toString(end[4]);
             endDate.setText(text);
@@ -395,7 +407,7 @@ public class AddActivity extends AppCompatActivity {
         {
             deadline[3] = ore;
             deadline[4] = minute;
-            String text = "Until " + Integer.toString(deadline[2]) + "." + Integer.toString(deadline[1])
+            String text = "Until " + Integer.toString(deadline[2]) + "." + Integer.toString(deadline[1] + 1)
                     + "." + Integer.toString(deadline[0]) + " " + Integer.toString(deadline[3])
                     + ":" + Integer.toString(deadline[4]);
             endDate.setText(text);
