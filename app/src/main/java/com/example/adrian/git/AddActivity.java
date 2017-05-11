@@ -1,332 +1,453 @@
 package com.example.adrian.git;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.os.Parcelable;
-import android.support.design.widget.FloatingActionButton;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.example.adrian.git.Date.Eveniment;
-import com.example.adrian.git.Date.EvenimentDinamic;
-import com.example.adrian.git.Date.EvenimentStatic;
-
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.Duration;
-import javax.xml.datatype.XMLGregorianCalendar;
+public class AddActivity extends AppCompatActivity {
 
-public class AddActivity extends AppCompatActivity
-        implements DurationPickerFragment.DurationPickerListener, InputConfirmFragment.InputConfirmListener{
-
-    private boolean stDate1Set = false;
-    private boolean stDate2Set = false;
-    private boolean endDate1Set = false;
-    private boolean endDate2Set = false;
-    private boolean deadline1Set = false;
-    private boolean deadline2Set = false;
-    private boolean durationSet = false;
-    private int stDate[];
-    private int endDate[];
-    private int deadline[];
-    private int duration[];
     private EditText nume;
-    private CheckBox dinamic;
-    private static final String ID_KEY = "id";
-    public static final String ST_DATE_KEY = "com.example.adrian.git.startDate";
-    public static final String END_DATE_KEY = "com.example.adrian.git.endDate";
-    public static final String DEADLINE_KEY = "com.example.adrian.git.deadline";
-    public static final String DURATION_KEY = "com.example.adrian.git.duration";
-    public static final String NAME_KEY = "com.example.adrian.git.name";
-    public static final String TYPE_KEY = "com.example.adrian.git.type";
-    public static final String OBLIGATORIU_KEY = "com.example.adrian.git.obligatoriu";
-    //public static final String REZULTAT_Eveniment = "com.example.adrian.git.Rezultat";
+    private TextView stDate;
+    private TextView endDate;
+    private CheckBox obligatoriu;
+    private boolean dinamic;
+    private CheckBox notificatie;
+    private EditText nota;
+    private int[] start;
+    private int[] end;
+    private int[] durata;
+    private int[] deadline;
+    private static final String BOOL1 = "com.example.adrian.git.bool1";
+    private static final String BOOL2 = "com.example.adrian.git.bool2";
+    private static final String DATA_KEY = "com.example.adrian.git.data";
+    private static final String DURATA_KEY = "com.example.adrian.git.durata";
 
-    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
 
-        private int sourceId;
+        boolean b1, b2;
+
+        private class MyDatePickerDialog extends DatePickerDialog
+        {
+
+            public MyDatePickerDialog(@NonNull Context context, @Nullable OnDateSetListener listener, int year, int month, int dayOfMonth) {
+                super(context, listener, year, month, dayOfMonth);
+            }
+
+            public void onClick(@NonNull DialogInterface dialog, int which)
+            {
+                if(which == DialogInterface.BUTTON_NEGATIVE)
+                {
+                    ((AddActivity) getActivity()).stergeData(b1, b2);
+                    dialog.cancel();
+                }
+                else
+                    super.onClick(dialog, which);
+            }
+        }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             Bundle b = getArguments();
-            sourceId = b.getInt(AddActivity.ID_KEY);
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-            return new DatePickerDialog(getActivity(), this, year, month, day);
+            b1 = b.getBoolean(BOOL1);
+            b2 = b.getBoolean(BOOL2);
+            int year, month, day;
+            int[] data = b.getIntArray(DATA_KEY);
+            if(data != null)
+            {
+                year = data[0];
+                month = data[1];
+                day = data[2];
+            }
+            else
+            {
+                final Calendar c = Calendar.getInstance();
+                year = c.get(Calendar.YEAR);
+                month = c.get(Calendar.MONTH);
+                day = c.get(Calendar.DAY_OF_MONTH);
+            }
+            return new MyDatePickerDialog(getActivity(), this, year, month, day);
+
         }
 
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            ((AddActivity) getActivity()).dateSet(year, month, dayOfMonth, sourceId);
+            ((AddActivity) getActivity()).alegeData(year, month, dayOfMonth, b1, b2);
         }
     }
 
-    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+    public static class TimePickerFragment extends DialogFragment
+            implements TimePickerDialog.OnTimeSetListener {
 
-        private int sourceId;
+        boolean b1, b2;
+
+        private class MyTimePickerDialog extends TimePickerDialog
+        {
+
+            MyTimePickerDialog(Context context, OnTimeSetListener listener, int hourOfDay, int minute, boolean is24HourView) {
+                super(context, listener, hourOfDay, minute, is24HourView);
+            }
+
+            public void onClick(DialogInterface dialog, int which)
+            {
+                if(which == DialogInterface.BUTTON_NEGATIVE)
+                {
+                    ((AddActivity) getActivity()).stergeData(b1, b2);
+                    dialog.cancel();
+                }
+                else
+                    super.onClick(dialog, which);
+            }
+        }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             Bundle b = getArguments();
-            sourceId = b.getInt(AddActivity.ID_KEY);
+            b1 = b.getBoolean(BOOL1);
+            b2 = b.getBoolean(BOOL2);
             final Calendar c = Calendar.getInstance();
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minute = c.get(Calendar.MINUTE);
-            return new TimePickerDialog(getActivity(), this, hour, minute,
+            return new MyTimePickerDialog(getActivity(), this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
-
         }
 
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            ((AddActivity) getActivity()).timeSet(hourOfDay, minute, sourceId);
+            ((AddActivity) getActivity()).alegeTimpul(hourOfDay, minute, b1, b2);
+        }
+
+    }
+
+    public static class DurationPickerFragment extends DialogFragment
+            implements DialogInterface.OnClickListener {
+
+        private EditText hours;
+        private EditText minutes;
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View v = inflater.inflate(R.layout.fragment_duration_picker, null);
+            builder.setView(v);
+            hours = (EditText) v.findViewById(R.id.hoursDurationDialFrag);
+            minutes = (EditText) v.findViewById(R.id.minutesDurationDialFrag);
+            Bundle b = getArguments();
+            if(b != null)
+            {
+                int[] durata = b.getIntArray(DURATA_KEY);
+                hours.setText(Integer.toString(durata[0]));
+                minutes.setText(Integer.toString(durata[1]));
+            }
+            return builder.setPositiveButton(R.string.save, this)
+                    .setNegativeButton(R.string.cancel, this)
+                    .create();
+        }
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch(which)
+            {
+                case DialogInterface.BUTTON_POSITIVE:
+                {
+                    int ore, minute;
+                    String h = hours.getText().toString();
+                    String m = minutes.getText().toString();
+                    if(h.isEmpty())
+                        ore = 0;
+                    else
+                        ore = Integer.parseInt(h);
+                    if(m.isEmpty())
+                        minute = 0;
+                    else
+                        minute = Integer.parseInt(m);
+                    ((AddActivity) getActivity()).alegeDurata(ore, minute);
+                    break;
+                }
+                case DialogInterface.BUTTON_NEGATIVE:
+                {
+                    ((AddActivity) getActivity()).stergeDurata();
+                    dialog.cancel();
+                    break;
+                }
+            }
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_temp);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAddAct);
+        stDate = (TextView) findViewById(R.id.stDateAddAct);
+        endDate = (TextView) findViewById(R.id.endDateAddAct);
         nume = (EditText) findViewById(R.id.numeAddAct);
-        dinamic = (CheckBox) findViewById(R.id.dinamicAddAct);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabAddAct);
-        stDate = new int[5];
-        endDate = new int[5];
-        deadline = new int[5];
-        duration = new int[2];
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(stDate1Set && stDate2Set && endDate1Set && endDate2Set && durationSet && deadline1Set && deadline2Set) {
-                    DialogFragment inputConfirm = new InputConfirmFragment();
-                    Bundle b = new Bundle();
-                    if (!dinamic.isChecked()) {
-                        b.putString(NAME_KEY, nume.getText().toString());
-                        b.putIntArray(ST_DATE_KEY, stDate);
-                        b.putIntArray(END_DATE_KEY, endDate);
-                        b.putBoolean(TYPE_KEY, false);
-                    } else {
-                        b.putString(NAME_KEY, nume.getText().toString());
-                        b.putIntArray(DURATION_KEY, duration);
-                        b.putIntArray(DEADLINE_KEY, deadline);
-                        b.putBoolean(TYPE_KEY, true);
-                    }
-                    inputConfirm.setArguments(b);
-                    inputConfirm.show(getFragmentManager(), "Confirm?");
-                }
-            }
-        });
+        obligatoriu = (CheckBox) findViewById(R.id.obligatoriuAddAct);
+        notificatie = (CheckBox) findViewById(R.id.notificatieAddAct);
+        nota = (EditText) findViewById(R.id.notaAddAct);
+        setSupportActionBar(toolbar);
     }
 
     @Override
-    public void onDurationPickerPositiveClick(DialogFragment dialog, int hours, int minutes) {
-        duration[0] = hours;
-        duration[1] = minutes;
-        durationSet = true;
+    public boolean onCreateOptionsMenu(Menu m)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.add_activity_menu, m);
+        return true;
     }
 
-    @Override
-    public void onDurationPickerNegativeClick(DialogFragment dialog) {
-        dialog.getDialog().cancel();
-    }
-
-    @Override
-    public void onInputConfirmPositiveClick(DialogFragment dialog, Bundle b, boolean obl) {
-        /*boolean tip = b.getBoolean(TYPE_KEY);
-        if(!tip)
+    public void changeType(View v)
+    {
+        CheckBox src = (CheckBox) v;
+        if(src.isChecked())
         {
-            Eveniment a = new EvenimentStatic();
-            int stDate[] = b.getIntArray(ST_DATE_KEY);
-            int endDate[] = b.getIntArray(END_DATE_KEY);
-            if(stDate == null || endDate == null)
+            src.setText(R.string.static2_add_act);
+            if(durata == null)
+                stDate.setText(R.string.st_date2_add_act);
+            else
             {
-                Toast.makeText(getApplicationContext(), "Start date sau end date null", Toast.LENGTH_LONG).show();
-                return;
+                String text = "Duration: " + Integer.toString(durata[0]) + " hours and "
+                        + Integer.toString(durata[1]) + " minutes";
+                stDate.setText(text);
             }
-            String name = b.getString(NAME_KEY);
-            Calendar start = new GregorianCalendar(stDate[0], stDate[1], stDate[2], stDate[3], stDate[4]);
-            Calendar end = new GregorianCalendar(endDate[0], endDate[1], endDate[2], endDate[3], endDate[4]);
-            a.setStartDate(start);
-            a.setEndDate(end);
-            a.setName(name);
-            Intent result = new Intent();
-            result.putExtra(REZULTAT_Eveniment, (Parcelable) a);
-            setResult(RESULT_OK, result);
-            finish();
+            if(deadline == null)
+                endDate.setText(R.string.end_date2_add_act);
+            else
+            {
+                String text = "Until " + Integer.toString(deadline[2]) + "." + Integer.toString(deadline[1])
+                        + "." + Integer.toString(deadline[0]) + " " + Integer.toString(deadline[3])
+                        + ":" + Integer.toString(deadline[4]);
+                endDate.setText(text);
+            }
+            dinamic = true;
         }
         else
         {
-            EvenimentDinamic a = new EvenimentDinamic();
-            int duration[] = b.getIntArray(DURATION_KEY);
-            int deadline[] = b.getIntArray(DEADLINE_KEY);
-            if(duration == null || deadline == null)
+            src.setText(R.string.static_add_act);
+            if(start == null)
+                stDate.setText(R.string.st_date_add_act);
+            else
             {
-                Toast.makeText(getApplicationContext(), "Duration sau deadline null", Toast.LENGTH_LONG).show();
-                return;
+                String text = "From " + Integer.toString(start[2]) + "." + Integer.toString(start[1])
+                        + "." + Integer.toString(start[0]) + " " + Integer.toString(start[3])
+                        + ":" + Integer.toString(start[4]);
+                stDate.setText(text);
             }
-            String name = b.getString(NAME_KEY);
-            DatatypeFactory df = new DatatypeFactory() {
-                @Override
-                public Duration newDuration(String lexicalRepresentation) {
-                    return null;
-                }
-
-                @Override
-                public Duration newDuration(long durationInMilliSeconds) {
-                    return null;
-                }
-
-                @Override
-                public Duration newDuration(boolean isPositive, BigInteger years, BigInteger months, BigInteger days, BigInteger hours, BigInteger minutes, BigDecimal seconds) {
-                    return null;
-                }
-
-                @Override
-                public XMLGregorianCalendar newXMLGregorianCalendar() {
-                    return null;
-                }
-
-                @Override
-                public XMLGregorianCalendar newXMLGregorianCalendar(String lexicalRepresentation) {
-                    return null;
-                }
-
-                @Override
-                public XMLGregorianCalendar newXMLGregorianCalendar(GregorianCalendar cal) {
-                    return null;
-                }
-
-                @Override
-                public XMLGregorianCalendar newXMLGregorianCalendar(BigInteger year, int month, int day, int hour, int minute, int second, BigDecimal fractionalSecond, int timezone) {
-                    return null;
-                }
-            };
-            Duration dura = df.newDuration(true, 0, 0, 0, duration[0], duration[1], 0);
-            Calendar dead = new GregorianCalendar(deadline[0], deadline[1], deadline[2], deadline[3], deadline[4]);
-            a.setName(name);
-            a.setDuration(dura);
-            a.setDeadline(dead);
-            Intent result = new Intent();
-            result.putExtra(REZULTAT_Eveniment, (Parcelable) a);
-            setResult(RESULT_OK, result);
-            finish();
-        }*/
-        b.putBoolean(OBLIGATORIU_KEY, obl);
-        Intent rezultat = new Intent();
-        rezultat.putExtras(b);
-        setResult(RESULT_OK, rezultat);
-        finish();
+            if(end == null)
+                endDate.setText(R.string.end_date_add_act);
+            else
+            {
+                String text = "To " + Integer.toString(end[2]) + "." + Integer.toString(end[1])
+                        + "." + Integer.toString(end[0]) + " " + Integer.toString(end[3])
+                        + ":" + Integer.toString(end[4]);
+                endDate.setText(text);
+            }
+            dinamic = false;
+        }
     }
 
-    @Override
-    public void onInputConfirmNegativeClick(DialogFragment dialog) {
-        dialog.getDialog().cancel();
-    }
-
-    public void pickDate(View v)
+    public void chooseDate(View v)
     {
         int id = v.getId();
-        Bundle b = new Bundle();
-        b.putInt(ID_KEY, id);
-        DialogFragment dialog = new DatePickerFragment();
-        dialog.setArguments(b);
-        dialog.show(getFragmentManager(), "Pick the date");
+        switch(id)
+        {
+            case R.id.stDateAddAct:
+            {
+                if(dinamic)
+                {
+                    DialogFragment dialog = new DurationPickerFragment();
+                    if(durata != null)
+                    {
+                        Bundle b = new Bundle();
+                        b.putIntArray(DURATA_KEY, durata);
+                        dialog.setArguments(b);
+                    }
+                    dialog.show(getFragmentManager(), "Pick the duration");
+                }
+                else
+                {
+                    Bundle b = new Bundle();
+                    b.putBoolean(BOOL1, false);
+                    b.putBoolean(BOOL2, false);
+                    DialogFragment dialog = new DatePickerFragment();
+                    if(start != null)
+                        b.putIntArray(DATA_KEY, start);
+                    dialog.setArguments(b);
+                    dialog.show(getFragmentManager(), "Pick the date");
+                }
+                break;
+            }
+            case R.id.endDateAddAct:
+            {
+                if(dinamic)
+                {
+                    Bundle b = new Bundle();
+                    b.putBoolean(BOOL1, true);
+                    b.putBoolean(BOOL2, true);
+                    DialogFragment dialog = new DatePickerFragment();
+                    if(deadline != null)
+                        b.putIntArray(DATA_KEY, deadline);
+                    dialog.setArguments(b);
+                    dialog.show(getFragmentManager(), "Pick the date");
+                }
+                else
+                {
+                    Bundle b = new Bundle();
+                    b.putBoolean(BOOL1, true);
+                    b.putBoolean(BOOL2, false);
+                    DialogFragment dialog = new DatePickerFragment();
+                    if(end != null)
+                        b.putIntArray(DATA_KEY, end);
+                    dialog.setArguments(b);
+                    dialog.show(getFragmentManager(), "Pick the date");
+                }
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
     }
 
-    public void pickTime(View v)
+    public void chooseLocation(View v)
     {
-        int id = v.getId();
-        Bundle b = new Bundle();
-        b.putInt(ID_KEY, id);
+        //TODO PlacePicker din google api - pentru backend
+
+        //TODO Sa adaug locatia in UI dupa ce e setata - frontend
+    }
+
+    public void alegeData(int an, int luna, int zi, boolean b1, boolean b2)
+    {
+        if(!b1 && !b2)
+        {
+            start = new int[5];
+            start[0] = an;
+            start[1] = luna;
+            start[2] = zi;
+        }
+        if(b1 && !b2)
+        {
+            end = new int[5];
+            end[0] = an;
+            end[1] = luna;
+            end[2] = zi;
+        }
+        if(b1 && b2)
+        {
+            deadline = new int[5];
+            deadline[0] = an;
+            deadline[1] = luna;
+            deadline[2] = zi;
+        }
         DialogFragment dialog = new TimePickerFragment();
+        Bundle b = new Bundle();
+        b.putBoolean(BOOL1, b1);
+        b.putBoolean(BOOL2, b2);
         dialog.setArguments(b);
         dialog.show(getFragmentManager(), "Pick the time");
     }
-    public void pickDuration(View v)
-    {
-        DialogFragment dialog = new DurationPickerFragment();
-        dialog.show(getFragmentManager(), "Pick the duration");
-    }
 
-    private void dateSet(int year, int month, int dayOfMonth, int id)
+    public void alegeTimpul(int ore, int minute, boolean b1, boolean b2)
     {
-        switch(id)
+        if(!b1 && !b2)
         {
-            case R.id.stDtAddAct:
-            {
-                stDate[2] = dayOfMonth;
-                stDate[1] = month;
-                stDate[0] = year;
-                stDate1Set = true;
-                break;
-            }
-            case R.id.endDtAddAct:
-            {
-                endDate[2] = dayOfMonth;
-                endDate[1] = month;
-                endDate[0] = year;
-                endDate1Set = true;
-                break;
-            }
-            case R.id.dlDtAddAct:
-            {
-                deadline[2] = dayOfMonth;
-                deadline[1] = month;
-                deadline[0] = year;
-                deadline1Set = true;
-                break;
-            }
-            default:
-            {
-                Toast.makeText(getApplicationContext(), "Id gresit, cumva", Toast.LENGTH_LONG).show();
-            }
+            start[3] = ore;
+            start[4] = minute;
+            String text = "From " + Integer.toString(start[2]) + "." + Integer.toString(start[1])
+                    + "." + Integer.toString(start[0]) + " " + Integer.toString(start[3])
+                    + ":" + Integer.toString(start[4]);
+            stDate.setText(text);
         }
-    }
-    private void timeSet(int hour, int minute, int id) {
-        switch(id)
+        if(b1 && !b2)
         {
-            case R.id.stTmAddAct:
-            {
-                stDate[3] = hour;
-                stDate[4] = minute;
-                stDate2Set = true;
-                break;
-            }
-            case R.id.endTmAddAct:
-            {
-                endDate[3] = hour;
-                endDate[4] = minute;
-                endDate2Set = true;
-                break;
-            }
-            case R.id.dlTmAddAct:
-            {
-                deadline[3] = hour;
-                deadline[4] = minute;
-                deadline2Set = true;
-                break;
-            }
-            default:
-            {
-                Toast.makeText(getApplicationContext(), "Id gresit, cumva", Toast.LENGTH_LONG).show();
-            }
+            end[3] = ore;
+            end[4] = minute;
+            String text = "To " + Integer.toString(end[2]) + "." + Integer.toString(end[1])
+                    + "." + Integer.toString(end[0]) + " " + Integer.toString(end[3])
+                    + ":" + Integer.toString(end[4]);
+            endDate.setText(text);
+        }
+        if(b1 && b2)
+        {
+            deadline[3] = ore;
+            deadline[4] = minute;
+            String text = "Until " + Integer.toString(deadline[2]) + "." + Integer.toString(deadline[1])
+                    + "." + Integer.toString(deadline[0]) + " " + Integer.toString(deadline[3])
+                    + ":" + Integer.toString(deadline[4]);
+            endDate.setText(text);
         }
     }
 
+    public void alegeDurata(int ore, int minute)
+    {
+        durata = new int[2];
+        durata[0] = ore;
+        durata[1] = minute;
+        String text = "Duration: " + Integer.toString(durata[0]) + " hours and "
+                + Integer.toString(durata[1]) + " minutes";
+        stDate.setText(text);
+    }
+
+    public void stergeDurata()
+    {
+        durata = null;
+        stDate.setText(R.string.st_date2_add_act);
+    }
+
+    public void stergeData(boolean b1, boolean b2)
+    {
+        if(!b1 && !b2)
+        {
+            start = null;
+            stDate.setText(R.string.st_date_add_act);
+        }
+        if(b1 && !b2)
+        {
+            end = null;
+            endDate.setText(R.string.end_date_add_act);
+        }
+        if(b1 && b2)
+        {
+            deadline = null;
+            endDate.setText(R.string.end_date2_add_act);
+        }
+    }
+
+    public void salveaza(MenuItem m)
+    {
+        /*TODO adauga un eveniment facut de voi (backend) cu datele de aici (null daca nu exista)
+        start[5] pentru startdate - an, luna, zi, ora, minut
+        end[5] pentru enddate - la fel
+        durata[2] pentru durata - ore, minute
+        deadline[5] pentru deadline - la fel ca celelalte date
+        dinamic - boolean, fals pentru static, true pentru dinamic
+        obligatoriu si notificatie - trebuie isChecked()
+        nume - getText().toString(), verificare sa nu fie gol
+        nota - la fel ca nume, dar e optional
+        */
+    }
 }

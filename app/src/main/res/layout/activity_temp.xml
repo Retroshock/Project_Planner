@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.adrian.git.AddActivity">
+    tools:context="com.example.adrian.git.TempActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarAddAct"
@@ -63,6 +63,7 @@
             android:layout_marginBottom="0dp"
             android:layout_marginTop="0dp"
             android:text="@string/st_date_add_act"
+            android:onClick="chooseDate"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -77,6 +78,7 @@
             android:layout_marginBottom="0dp"
             android:layout_marginTop="0dp"
             android:text="@string/end_date_add_act"
+            android:onClick="chooseDate"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/stDateAddAct"
             app:layout_constraintRight_toRightOf="parent"
@@ -97,6 +99,7 @@
         android:layout_marginTop="4dp"
         android:background="@color/culoareIulia1"
         android:text="@string/location_add_act"
+        android:onClick="chooseLocation"
         app:layout_constraintBottom_toTopOf="@+id/obligatoriuAddAct"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideDr"
@@ -129,6 +132,7 @@
         android:layout_marginTop="4dp"
         android:background="@color/culoareIulia3"
         android:text="@string/static_add_act"
+        android:onClick="changeType"
         app:layout_constraintBottom_toTopOf="@+id/notificatieAddAct"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideDr"

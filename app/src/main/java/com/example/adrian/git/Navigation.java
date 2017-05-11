@@ -32,14 +32,14 @@ public class Navigation extends AppCompatActivity
                 startActivity(intent);
             }
         });
-        fab.setOnLongClickListener(new View.OnLongClickListener() {
+        /*fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TempActivity.class);
                 startActivity(intent);
                 return true;
             }
-        });
+        });*/
 
         //Intent intent = new Intent(this, SignInActivity.class);
         //startActivity(intent);
