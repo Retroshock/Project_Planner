@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.adrian.git">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,12 +22,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddActivity" />
-        <activity android:name=".MainCalendarActivity"></activity>
+        <activity android:name=".MainCalendarActivity"/>
+
         <activity
             android:name=".Navigation"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme" />
-        <activity android:name=".TempActivity"></activity>
+        <activity android:name=".TempActivity"/>
     </application>
 
 </manifest>
