@@ -1,6 +1,10 @@
-package com.example.adrian.git.Date;
+package com.example.adrian.git;
 
 import android.support.design.widget.BaseTransientBottomBar;
+
+import com.example.adrian.git.Date.Constants;
+import com.example.adrian.git.Date.Eveniment;
+import com.example.adrian.git.Date.MyCalendar;
 
 import org.joda.time.Duration;
 

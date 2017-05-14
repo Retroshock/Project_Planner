@@ -76,6 +76,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
             Glide.with(this).load(imgURL).into(profilePicture);
             updateUI(true);*/
             Intent intent = new Intent(this, Navigation.class);
+            Toast.makeText(getApplicationContext(), "Connected! ", Toast.LENGTH_LONG).show();
             startActivity(intent);
         }
         else
