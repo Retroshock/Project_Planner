@@ -18,6 +18,6 @@ public class DayFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.day_layout, container, false);
+        myView = inflater.inflate(R.layout.fragment_day, container, false);
         return myView;}
 }
