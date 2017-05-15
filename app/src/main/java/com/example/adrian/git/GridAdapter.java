@@ -50,9 +50,9 @@ class GridAdapter extends ArrayAdapter{
             view = mInflater.inflate(R.layout.single_cell_layout, parent, false);
         }
         if (displayMonth == currentMonth && displayYear == currentYear){
-            view.setBackgroundColor(Color.parseColor("#FF5733"));
+            view.setBackgroundColor(Color.parseColor("##25bfd0"));
         }else{
-            view.setBackgroundColor(Color.parseColor("#cccccc"));
+            view.setBackgroundColor(Color.parseColor("#ededed"));
         }
         //Add a day to calendar
         TextView cellNumber = (TextView) view.findViewById(R.id.calendar_date_id);
@@ -67,7 +67,7 @@ class GridAdapter extends ArrayAdapter{
             if (dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH) &&
                     displayMonth == eventCalendar.get(Calendar.MONTH) + 1 &&
                     displayYear == eventCalendar.get(Calendar.YEAR)){
-                eventIndicator.setBackgroundColor( Color.parseColor("#FF4081"));
+                eventIndicator.setBackgroundColor( Color.parseColor("#cffafc"));
             }
         }
         return view;
