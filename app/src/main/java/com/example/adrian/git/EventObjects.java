@@ -10,12 +10,10 @@ class EventObjects {
     private int id;
     private String message;
     private Date date;
-    private Date end;
 
     public EventObjects (String message, Date date){
         this.message = message;
         this.date = date;
-        this.end = end;
     }
 
     public EventObjects(int id, String message, Date reminderDate) {

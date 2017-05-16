@@ -1,148 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_custom_calendar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundal_month"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:paddingTop="8dp">
-
+        android:background="@color/colorAccent"
+        android:orientation="horizontal">
         <ImageView
             android:id="@+id/previous_month"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_weight="1"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_chevron_left_black_48dp" />
-
+            android:src="@drawable/left_arrow"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/display_current_date"
-            android:layout_width="179dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="4dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
             android:text="@string/current_date"
-            android:textColor="@color/colorBlack"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:layout_weight="3"/>
         <ImageView
             android:id="@+id/next_month"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_weight="1"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_chevron_right_black_48dp" />
+            android:src="@drawable/right_arrow"
+            android:layout_weight="1"/>
     </LinearLayout>
-
+    <Button
+        android:id="@+id/add_calendar_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:text="@string/add_event"
+        android:gravity="center"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:elevation="1dp"
-        android:orientation="horizontal"
+        android:background="@color/colorPrimaryDark"
         android:paddingBottom="4dp"
-        android:paddingTop="4dp">
+        android:paddingTop="4dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/mon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             android:text="@string/mon"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold" />
-
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/tue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             android:text="@string/tue"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold" />
-
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/wed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             android:text="@string/wed"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold" />
-
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/thu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             android:text="@string/thu"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold" />
-
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/fri"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             android:text="@string/fri"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold" />
-
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/sat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             android:text="@string/sat"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold" />
-
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/sun"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/colorWhite"
             android:text="@string/sun"
-            android:textColor="@color/colorBlack"
-            android:textStyle="bold" />
+            android:layout_marginTop="4dp"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <GridView
         android:id="@+id/calendar_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/fundal_trans"
         android:numColumns="7" />
 </LinearLayout>
