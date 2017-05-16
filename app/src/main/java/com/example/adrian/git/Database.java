@@ -30,7 +30,6 @@ public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAMES = "events";
     private static final int DATABASE_VERSION = 3;
 
-    public SQLiteDatabase myDataBase;
 
     public Database(Context context) {
         super(context, DATABASE_NAMES, null, DATABASE_VERSION);

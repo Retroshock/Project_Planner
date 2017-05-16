@@ -18,9 +18,10 @@ import java.util.Locale;
  */
 
 public class AddEventToDatabase {
-    Eveniment eveniment;
     private static Database dbHelper;
+    Eveniment eveniment;
     private SQLiteDatabase db;
+
     public AddEventToDatabase(Eveniment eveniment, Context context){
         this.eveniment = eveniment;
         dbHelper = new Database(context);
@@ -50,9 +51,5 @@ public class AddEventToDatabase {
 
         }
 
-
-        //TODO aici trebuie sa introduc un element in BD - de facut!!!
-//        db.execSQL(db.rawQuery("INSERT INTO reminders " +
-//                "[(id, startDate, endDate, name, location, deadline, duration)] " );
     }
 }
