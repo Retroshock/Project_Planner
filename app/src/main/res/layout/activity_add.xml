@@ -18,9 +18,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-    <EditText
-        android:id="@+id/numeAddAct"
+<!--
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/identitateAddAct"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="0dp"
@@ -30,46 +30,71 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@color/culoareIulia2"
-        android:ems="10"
-        android:hint="@string/nume_hint_add_act"
-        android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/dataAddAct"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideDr"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarAddAct" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAddAct">
+-->
+        <EditText
+            android:id="@+id/numeAddAct"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:hint="@string/nume_hint_add_act"
+            android:inputType="textPersonName"
+            android:background="@color/culoareIulia2"
+            app:layout_constraintBottom_toTopOf="@+id/stDateAddAct"
+            app:layout_constraintLeft_toLeftOf="@+id/guideDr"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarAddAct"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/dataAddAct"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:background="@color/culoareIulia3"
-        app:layout_constraintBottom_toTopOf="@+id/locatieAddAct"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="@+id/guideDr"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numeAddAct">
+    <!--
+</android.support.constraint.ConstraintLayout>
 
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/dataAddAct"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_marginBottom="0dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:background="@color/culoareIulia3"
+    app:layout_constraintBottom_toTopOf="@+id/locatieAddAct"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintLeft_toLeftOf="@+id/guideDr"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/numeAddAct">
+-->
         <TextView
             android:id="@+id/stDateAddAct"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="0dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginEnd="0dp"
             android:text="@string/st_date_add_act"
             android:onClick="chooseDate"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/culoareIulia3"
+            app:layout_constraintBottom_toTopOf="@+id/locatieAddAct"
             app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/guideDr"
             app:layout_constraintRight_toLeftOf="@+id/endDateAddAct"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/numeAddAct"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="spread" />
 
         <TextView
             android:id="@+id/endDateAddAct"
@@ -77,17 +102,22 @@
             android:layout_height="0dp"
             android:layout_marginBottom="0dp"
             android:layout_marginTop="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/end_date_add_act"
             android:onClick="chooseDate"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/culoareIulia3"
+            app:layout_constraintBottom_toBottomOf="@+id/stDateAddAct"
             app:layout_constraintLeft_toRightOf="@+id/stDateAddAct"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/stDateAddAct"
             app:layout_constraintVertical_bias="0.556" />
-
+<!--
     </android.support.constraint.ConstraintLayout>
-
-    <TextView
+-->
+    <EditText
         android:id="@+id/locatieAddAct"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -98,14 +128,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:background="@color/culoareIulia1"
-        android:text="@string/location_add_act"
-        android:onClick="chooseLocation"
-        app:layout_constraintBottom_toTopOf="@+id/obligatoriuAddAct"
+        android:ems="10"
+        android:hint="@string/locatie_hint_add_act"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/staticAddAct"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideDr"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataAddAct" />
-
+        app:layout_constraintTop_toBottomOf="@+id/stDateAddAct" />
+<!--
     <CheckBox
         android:id="@+id/obligatoriuAddAct"
         android:layout_width="0dp"
@@ -121,7 +152,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/guideDr"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locatieAddAct" />
-
+-->
     <CheckBox
         android:id="@+id/staticAddAct"
         android:layout_width="0dp"
@@ -137,7 +168,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/guideDr"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/obligatoriuAddAct" />
+        app:layout_constraintTop_toBottomOf="@+id/locatieAddAct" />
 
     <CheckBox
         android:id="@+id/notificatieAddAct"
@@ -191,7 +222,7 @@
     <ImageView
         android:id="@+id/linieAddAct"
         android:layout_width="0dp"
-        android:layout_height="4dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
@@ -200,7 +231,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/guideSt"
         app:layout_constraintRight_toLeftOf="@+id/guideDr"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAddAct"
         app:srcCompat="@drawable/line_1" />
 
     <ImageView
@@ -228,11 +259,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dataAddAct"
+        app:layout_constraintBottom_toBottomOf="@+id/stDateAddAct"
         app:layout_constraintDimensionRatio="w,1:1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/guideSt"
-        app:layout_constraintTop_toTopOf="@+id/dataAddAct"
+        app:layout_constraintTop_toTopOf="@+id/stDateAddAct"
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/timp" />
 
@@ -251,21 +282,6 @@
         app:layout_constraintTop_toTopOf="@+id/locatieAddAct"
         app:layout_constraintVertical_bias="0.5"
         app:srcCompat="@drawable/locatie" />
-
-    <ImageView
-        android:id="@+id/obligatoriuImgAddAct"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/image_view_add_act"
-        android:layout_marginBottom="0dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/obligatoriuAddAct"
-        app:layout_constraintDimensionRatio="w,1:1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/guideSt"
-        app:layout_constraintTop_toTopOf="@+id/obligatoriuAddAct"
-        app:srcCompat="@drawable/stea" />
 
     <ImageView
         android:id="@+id/staticImgAddAct"

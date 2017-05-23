@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import android.view.ViewGroup;
 
 public class WeekFragment extends Fragment{
 
-    VerticalViewPager pager;
+    ViewPager pager;
     public static final String TEST = "test 123";
 
     /**
@@ -61,7 +62,7 @@ public class WeekFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_week, container, false);
-        pager = (VerticalViewPager) root.findViewById(R.id.pagerWeekFrag);
+        pager = (ViewPager) root.findViewById(R.id.pagerWeekFrag);
         WeeklyPagerAdapter adaptor = new WeeklyPagerAdapter(getChildFragmentManager());
         //TODO dupa ce WeeklyPagerAdapter si WeeklyLayoutFragment sunt implementate, decomentez randurile astea
         //TODO gaseste o metoda sa stabilesti pozitia saptamanii curente ca un int >=0

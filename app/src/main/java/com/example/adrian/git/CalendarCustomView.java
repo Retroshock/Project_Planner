@@ -139,7 +139,7 @@ public class CalendarCustomView extends LinearLayout {
         previousButton = (ImageView) view.findViewById(R.id.previous_month);
         nextButton = (ImageView) view.findViewById(R.id.next_month);
         currentDate = (TextView) view.findViewById(R.id.display_current_date);
-        addEventButton = (Button) view.findViewById(R.id.add_calendar_event);
+        //addEventButton = (Button) view.findViewById(R.id.add_calendar_event);
         calendarGridView = (GridView) view.findViewById(R.id.calendar_grid);
     }
 

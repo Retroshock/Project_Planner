@@ -19,9 +19,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -39,14 +41,17 @@ public class AddActivity extends AppCompatActivity {
     private EditText nume;
     private TextView stDate;
     private TextView endDate;
-    private CheckBox obligatoriu;
     private boolean dinamic;
     private CheckBox notificatie;
     private EditText nota;
+    private EditText locatie;
+    private Spinner imagine;
+
     private int[] start;
     private int[] end;
     private int[] durata;
     private int[] deadline;
+
     private static final String BOOL1 = "com.example.adrian.git.bool1";
     private static final String BOOL2 = "com.example.adrian.git.bool2";
     private static final String DATA_KEY = "com.example.adrian.git.data";
@@ -219,14 +224,14 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_temp);
+        setContentView(R.layout.activity_add);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAddAct);
         stDate = (TextView) findViewById(R.id.stDateAddAct);
         endDate = (TextView) findViewById(R.id.endDateAddAct);
         nume = (EditText) findViewById(R.id.numeAddAct);
-        obligatoriu = (CheckBox) findViewById(R.id.obligatoriuAddAct);
         notificatie = (CheckBox) findViewById(R.id.notificatieAddAct);
         nota = (EditText) findViewById(R.id.notaAddAct);
+        locatie = (EditText) findViewById(R.id.locatieAddAct);
         setSupportActionBar(toolbar);
     }
 
@@ -352,13 +357,6 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
-    public void chooseLocation(View v)
-    {
-        //TODO PlacePicker din google api - pentru backend
-
-        //TODO Sa adaug locatia in UI dupa ce e setata - frontend
-    }
-
     public void alegeData(int an, int luna, int zi, boolean b1, boolean b2, Bundle b3)
     {
         if(!b1 && !b2)
@@ -465,9 +463,9 @@ public class AddActivity extends AppCompatActivity {
         durata[2] pentru durata - ore, minute
         deadline[5] pentru deadline - la fel ca celelalte date
         dinamic - boolean, fals pentru static, true pentru dinamic
-        obligatoriu si notificatie - trebuie isChecked()
+        notificatie - trebuie isChecked()
         nume - getText().toString(), verificare sa nu fie gol
-        nota - la fel ca nume, dar e optional
+        nota, locatie - la fel ca nume, dar probabil optionale
         */
         Eveniment ev = new Eveniment();
         ev.setStartDate(convertArrToDateStr(start));
