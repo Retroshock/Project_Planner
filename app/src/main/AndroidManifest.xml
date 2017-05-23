@@ -28,7 +28,6 @@
             android:name=".Navigation"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme" />
-        <activity android:name=".TempActivity"/>
     </application>
 
 </manifest>

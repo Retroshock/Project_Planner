@@ -36,14 +36,13 @@ public class AddActivity extends AppCompatActivity {
     private boolean dinamic;
     private CheckBox notificatie;
     private EditText nota;
+    private EditText locatie;
     private Spinner imagine;
 
     private int[] start;
     private int[] end;
     private int[] durata;
     private int[] deadline;
-    private int imagineSelectata;
-    private Integer[] imagini;
 
     private static final String BOOL1 = "com.example.adrian.git.bool1";
     private static final String BOOL2 = "com.example.adrian.git.bool2";
@@ -224,26 +223,7 @@ public class AddActivity extends AppCompatActivity {
         nume = (EditText) findViewById(R.id.numeAddAct);
         notificatie = (CheckBox) findViewById(R.id.notificatieAddAct);
         nota = (EditText) findViewById(R.id.notaAddAct);
-        imagine = (Spinner) findViewById(R.id.imagineAddAct);
-        imagine.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                imagineSelectata = (Integer) parent.getItemAtPosition(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        //TODO adauga imagini (cele deja aici sunt doar de testare
-        imagini = new Integer[3];
-        imagini[0] = android.R.drawable.ic_input_add;
-        imagini[1] = android.R.drawable.ic_input_get;
-        imagini[2] = android.R.drawable.ic_input_delete;
-        ImageArrayAdapter adapter = new ImageArrayAdapter(this, android.R.layout.simple_spinner_item, imagini);
-        imagine.setAdapter(adapter);
+        locatie = (EditText) findViewById(R.id.locatieAddAct);
         setSupportActionBar(toolbar);
     }
 
@@ -477,7 +457,7 @@ public class AddActivity extends AppCompatActivity {
         dinamic - boolean, fals pentru static, true pentru dinamic
         notificatie - trebuie isChecked()
         nume - getText().toString(), verificare sa nu fie gol
-        nota - la fel ca nume, dar e optional
+        nota, locatie - la fel ca nume, dar probabil optionale
         */
     }
 }
