@@ -18,9 +18,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -35,10 +37,15 @@ public class AddActivity extends AppCompatActivity {
     private boolean dinamic;
     private CheckBox notificatie;
     private EditText nota;
+    private Spinner imagine;
+
     private int[] start;
     private int[] end;
     private int[] durata;
     private int[] deadline;
+    private int imagineSelectata;
+    private Integer[] imagini;
+
     private static final String BOOL1 = "com.example.adrian.git.bool1";
     private static final String BOOL2 = "com.example.adrian.git.bool2";
     private static final String DATA_KEY = "com.example.adrian.git.data";
@@ -211,7 +218,7 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_temp);
+        setContentView(R.layout.activity_add);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarAddAct);
         stDate = (TextView) findViewById(R.id.stDateAddAct);
         endDate = (TextView) findViewById(R.id.endDateAddAct);
@@ -219,6 +226,26 @@ public class AddActivity extends AppCompatActivity {
         obligatoriu = (CheckBox) findViewById(R.id.obligatoriuAddAct);
         notificatie = (CheckBox) findViewById(R.id.notificatieAddAct);
         nota = (EditText) findViewById(R.id.notaAddAct);
+        imagine = (Spinner) findViewById(R.id.imagineAddAct);
+        imagine.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                imagineSelectata = (Integer) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //TODO adauga imagini (cele deja aici sunt doar de testare
+        imagini = new Integer[3];
+        imagini[0] = android.R.drawable.ic_input_add;
+        imagini[1] = android.R.drawable.ic_input_get;
+        imagini[2] = android.R.drawable.ic_input_delete;
+        ImageArrayAdapter adapter = new ImageArrayAdapter(this, android.R.layout.simple_spinner_item, imagini);
+        imagine.setAdapter(adapter);
         setSupportActionBar(toolbar);
     }
 
