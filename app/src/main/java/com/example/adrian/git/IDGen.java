@@ -7,9 +7,9 @@ import android.database.Cursor;
  */
 
 public class IDGen {
-    public static long idCurent;
+    public static long idCurent = 0;
     public static void setIdCurent(){
-        String query = "SELECT max(id) from evenimente";
+        String query = "SELECT max(id) id from evenimente";
         Cursor c = DatabaseObject.getDbConnection().rawQuery(query, null);
         if (c.moveToFirst()){
             idCurent = c.getLong(c.getColumnIndexOrThrow("id"));
