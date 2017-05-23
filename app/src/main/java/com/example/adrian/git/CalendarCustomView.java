@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.adrian.git.Date.Eveniment;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,8 +32,10 @@ public class CalendarCustomView extends LinearLayout {
     private static final String TAG = CalendarCustomView.class.getSimpleName();
     private ImageView previousButton, nextButton;
     private TextView currentDate;
+    private List <Date> dayValueInCells;
     private GridView calendarGridView;
     private Button addEventButton;
+    private List<Eveniment> mEvents;
     private static final int MAX_CALENDAR_COLUMN = 42;
     private int month, year;
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
@@ -72,9 +76,29 @@ public class CalendarCustomView extends LinearLayout {
         calendarGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context, "Clicked " + position, Toast.LENGTH_LONG).show();
+                Date dateAtPosition = getDateAtPosition(position);
+                String eventName = getEventNameAtDate(dateAtPosition);
+                Toast.makeText(context, eventName, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private String getEventNameAtDate(Date dateAtPosition) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(dateAtPosition);
+        for (Eveniment x:mEvents){
+            Calendar temp = Calendar.getInstance();
+            temp.setTime(x.getStartDate());
+            if (temp.get(Calendar.MONTH) == c.get(Calendar.MONTH)){
+                if (temp.get(Calendar.DAY_OF_MONTH) == c.get(Calendar.DAY_OF_MONTH))
+                    return x.getName();
+            }
+        }
+        return "No event here";
+    }
+
+    private Date getDateAtPosition(int position) {
+        return dayValueInCells.get(position);
     }
 
     private void setPreviousButtonClickEvent() {
@@ -88,9 +112,11 @@ public class CalendarCustomView extends LinearLayout {
     }
 
     private void setUpCalendarAdapter() {
-        List<Date> dayValueInCells = new ArrayList<>();
+        dayValueInCells = new ArrayList<>();
         mQuery = new DatabaseQuery(context);
-        List<EventObjects> mEvents = mQuery.getAllFutureEvents();
+        if (mQuery.getAllFutureEvents().size() > 0)
+            mQuery.addSleepEventsToDB(mQuery.getAllFutureEvents());
+        mEvents = mQuery.getAllFutureEvents();
         //List <EventObjects> mEvents = new ArrayList<>();
         Calendar mCal = (Calendar)cal.clone();
         mCal.set(Calendar.DAY_OF_MONTH, 1);
