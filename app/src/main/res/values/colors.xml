@@ -9,5 +9,7 @@
     <color name="culoareIulia1">#FCFCFC</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorDivider">#aaaaaa</color>
+
 
 </resources>
