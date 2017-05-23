@@ -34,7 +34,7 @@ public class AddEventToDatabase {
             query = "INSERT INTO evenimente ( nume, startDate, endDate, id, locatie )" +
                     " VALUES ( '" + eveniment.getName() + "' , '" + sdf.format(eveniment.getStartDate()) + "' , '" +
                     sdf.format(eveniment.getEndDate()) + "' , " + String.valueOf(eveniment.getID()) +
-                    ", '" + eveniment.getLocationToString() + "' );" ;
+                    ", '" +  " ' );" ; // aici pun locatia
 //            StringBuilder stringBuilder = new StringBuilder();
 
 //            String pth = db.getPath();

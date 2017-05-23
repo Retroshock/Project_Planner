@@ -32,6 +32,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -472,13 +473,15 @@ public class AddActivity extends AppCompatActivity {
         ev.setStartDate(convertArrToDateStr(start));
         ev.setEndDate(convertArrToDateStr(end));
         ev.setName(nume.getText().toString());
+        ev.setID(IDGen.idCurent);
+        //ev.setLocatie();
         AddEventToDatabase.add(ev);
         Toast.makeText(this, "Eveniment " + ev.getName() + " Adaugat", Toast.LENGTH_SHORT).show();
         finish();
     }
 
     private Date convertArrToDateStr (int[] date){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Strings.DATE_FORMAT);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Strings.DATE_FORMAT, Locale.ENGLISH);
         String result,day,month,year,minute,hour;
         year = String.valueOf(date[0]);
         month = String.valueOf(date[1] + 1);

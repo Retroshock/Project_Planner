@@ -19,7 +19,7 @@ public class Eveniment implements Comparable<Eveniment> {
 
     private String name;
 
-    private Location locatie;
+    private String locatie;
 
     private boolean obligatoriu;
 
@@ -31,11 +31,11 @@ public class Eveniment implements Comparable<Eveniment> {
         this.obligatoriu = obligatoriu;
     }
 
-    public Location getLocatie() {
+    public String getLocatie() {
         return locatie;
     }
 
-    public void setLocatie(Location locatie) {
+    public void setLocatie(String locatie) {
         this.locatie = locatie;
     }
 
@@ -63,15 +63,13 @@ public class Eveniment implements Comparable<Eveniment> {
         this.name = name;
     }
 
-    public String getLocationToString (){
-        if (this.locatie == null)
-            return "";
-        return Location.convert(locatie.getLatitude(), Location.FORMAT_DEGREES) + " " + Location.convert(locatie.getLongitude(), Location.FORMAT_DEGREES);
-    }
-
     @Override
     public int compareTo(@NonNull Eveniment o) {
         return startDate.compareTo(o.getStartDate());
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
     }
 
     public long getID() {

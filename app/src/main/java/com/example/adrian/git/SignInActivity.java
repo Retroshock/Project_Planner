@@ -47,6 +47,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 .addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions).build();
 
         DatabaseObject BD = new DatabaseObject(getApplicationContext());
+        IDGen.setIdCurent();
     }
 
     @Override
