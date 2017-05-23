@@ -33,7 +33,6 @@ public class AddActivity extends AppCompatActivity {
     private EditText nume;
     private TextView stDate;
     private TextView endDate;
-    private CheckBox obligatoriu;
     private boolean dinamic;
     private CheckBox notificatie;
     private EditText nota;
@@ -223,7 +222,6 @@ public class AddActivity extends AppCompatActivity {
         stDate = (TextView) findViewById(R.id.stDateAddAct);
         endDate = (TextView) findViewById(R.id.endDateAddAct);
         nume = (EditText) findViewById(R.id.numeAddAct);
-        obligatoriu = (CheckBox) findViewById(R.id.obligatoriuAddAct);
         notificatie = (CheckBox) findViewById(R.id.notificatieAddAct);
         nota = (EditText) findViewById(R.id.notaAddAct);
         imagine = (Spinner) findViewById(R.id.imagineAddAct);
@@ -371,13 +369,6 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
-    public void chooseLocation(View v)
-    {
-        //TODO PlacePicker din google api - pentru backend
-
-        //TODO Sa adaug locatia in UI dupa ce e setata - frontend
-    }
-
     public void alegeData(int an, int luna, int zi, boolean b1, boolean b2, Bundle b3)
     {
         if(!b1 && !b2)
@@ -484,7 +475,7 @@ public class AddActivity extends AppCompatActivity {
         durata[2] pentru durata - ore, minute
         deadline[5] pentru deadline - la fel ca celelalte date
         dinamic - boolean, fals pentru static, true pentru dinamic
-        obligatoriu si notificatie - trebuie isChecked()
+        notificatie - trebuie isChecked()
         nume - getText().toString(), verificare sa nu fie gol
         nota - la fel ca nume, dar e optional
         */
