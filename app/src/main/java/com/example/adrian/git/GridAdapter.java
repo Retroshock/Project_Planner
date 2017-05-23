@@ -52,7 +52,7 @@ class GridAdapter extends ArrayAdapter{
             view = mInflater.inflate(R.layout.single_cell_layout, parent, false);
         }
         if (displayMonth == currentMonth && displayYear == currentYear){
-            view.setBackgroundColor(Color.parseColor("##25bfd0"));
+            view.setBackgroundColor(Color.parseColor("#25bfd0"));
         }else{
             view.setBackgroundColor(Color.parseColor("#ededed"));
         }
