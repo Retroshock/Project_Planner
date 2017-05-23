@@ -97,4 +97,10 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
             handleResult(result);
         }
     }
+
+    public void skip(View v)
+    {
+        Intent intent = new Intent(this, Navigation.class);
+        startActivity(intent);
+    }
 }
