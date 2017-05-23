@@ -1,12 +1,7 @@
 package com.example.adrian.git;
 
-import android.support.design.widget.BaseTransientBottomBar;
-
 import com.example.adrian.git.Date.Constants;
 import com.example.adrian.git.Date.Eveniment;
-import com.example.adrian.git.Date.MyCalendar;
-
-import org.joda.time.Duration;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +10,7 @@ import java.util.Date;
  * Created by Robert Iacob on 22.04.2017.
  */
 
-public class MergeEvents extends MyCalendar {
+public class MergeEvents  {
 
     private ArrayList <Eveniment> freeTime;
     private ArrayList <Eveniment> mergeArray;

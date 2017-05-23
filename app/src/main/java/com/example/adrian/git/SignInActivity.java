@@ -1,6 +1,7 @@
 package com.example.adrian.git;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +45,8 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 .requestEmail().build();
         googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this,this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions).build();
+
+        DatabaseObject BD = new DatabaseObject(getApplicationContext());
     }
 
     @Override
@@ -100,7 +103,18 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
 
     public void skip(View v)
     {
-        Intent intent = new Intent(this, Navigation.class);
-        startActivity(intent);
+        //getApplicationContext().deleteDatabase("events");
+        String verifyQuery = "select * from sleep;";
+
+        Cursor cursor = DatabaseObject.getDbConnection().rawQuery(verifyQuery, null);
+        if (!cursor.moveToFirst()) {
+            Intent intent = new Intent(this, PickSleepActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Intent intent = new Intent (this, Navigation.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

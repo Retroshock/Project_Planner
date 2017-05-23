@@ -5,4 +5,5 @@ package com.example.adrian.git;
  */
 
 public class Strings {
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm";
 }

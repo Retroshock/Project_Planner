@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -23,8 +24,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.example.adrian.git.Date.Eveniment;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -461,5 +468,30 @@ public class AddActivity extends AppCompatActivity {
         nume - getText().toString(), verificare sa nu fie gol
         nota - la fel ca nume, dar e optional
         */
+        Eveniment ev = new Eveniment();
+        ev.setStartDate(convertArrToDateStr(start));
+        ev.setEndDate(convertArrToDateStr(end));
+        ev.setName(nume.getText().toString());
+        AddEventToDatabase.add(ev);
+        Toast.makeText(this, "Eveniment " + ev.getName() + " Adaugat", Toast.LENGTH_SHORT).show();
+        finish();
     }
+
+    private Date convertArrToDateStr (int[] date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(Strings.DATE_FORMAT);
+        String result,day,month,year,minute,hour;
+        year = String.valueOf(date[0]);
+        month = String.valueOf(date[1] + 1);
+        day = String.valueOf(date[2]);
+        hour = String.valueOf(date[3]);
+        minute = String.valueOf(date[4]);
+        result = year + "-" + month + "-" + day + " " + hour + ":" + minute;
+        try {
+            return simpleDateFormat.parse(result);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

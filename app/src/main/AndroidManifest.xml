@@ -22,13 +22,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddActivity" />
-        <activity android:name=".MainCalendarActivity"/>
-
+        <activity android:name=".MainCalendarActivity" />
         <activity
             android:name=".Navigation"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme" />
-        <activity android:name=".TempActivity"/>
+        <activity android:name=".TempActivity" />
+        <activity android:name=".PickSleepActivity"></activity>
     </application>
 
 </manifest>
