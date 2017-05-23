@@ -13,4 +13,5 @@ public class BundleKeys {
     public static final String TYPE_KEY = "com.example.adrian.git.type";
     public static final String OBLIGATORIU_KEY = "com.example.adrian.git.obligatoriu";
     public static final String WEEK_KEY = "com.example.adrian.git.week";
+    public static final String WEEK_KEY_POSITION = "com.example.adrian.git.week_position";
 }

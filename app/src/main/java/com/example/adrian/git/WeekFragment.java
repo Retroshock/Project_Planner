@@ -71,6 +71,7 @@ public class WeekFragment extends Fragment{
             }
             Bundle b = new Bundle();
             b.putSerializable(BundleKeys.WEEK_KEY, eventsBundle);
+            b.putInt(BundleKeys.WEEK_KEY_POSITION, position);
             Fragment f = new WeeklyLayoutFragment();
             f.setArguments(b);
             return f;
