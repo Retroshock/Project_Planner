@@ -37,7 +37,6 @@ public class AddActivity extends AppCompatActivity {
     private CheckBox notificatie;
     private EditText nota;
     private EditText locatie;
-    private Spinner imagine;
 
     private int[] start;
     private int[] end;
