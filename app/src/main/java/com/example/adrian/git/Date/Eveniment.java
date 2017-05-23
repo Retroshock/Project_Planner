@@ -3,6 +3,7 @@ package com.example.adrian.git.Date;
 import android.location.Location;
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.xml.datatype.Duration;
@@ -11,13 +12,15 @@ import javax.xml.datatype.Duration;
  * Created by Adrian on 26.03.2017.
  */
 
-public class Eveniment implements Comparable<Eveniment> {
+public class Eveniment implements Comparable<Eveniment> , Serializable{
 
     private Date startDate, endDate;
 
+    private long ID ;
+
     private String name;
 
-    private Location locatie;
+    private String locatie;
 
     private boolean obligatoriu;
 
@@ -29,11 +32,11 @@ public class Eveniment implements Comparable<Eveniment> {
         this.obligatoriu = obligatoriu;
     }
 
-    public Location getLocatie() {
+    public String getLocatie() {
         return locatie;
     }
 
-    public void setLocatie(Location locatie) {
+    public void setLocatie(String locatie) {
         this.locatie = locatie;
     }
 
@@ -61,9 +64,16 @@ public class Eveniment implements Comparable<Eveniment> {
         this.name = name;
     }
 
-
     @Override
     public int compareTo(@NonNull Eveniment o) {
         return startDate.compareTo(o.getStartDate());
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
+    }
+
+    public long getID() {
+        return ID;
     }
 }

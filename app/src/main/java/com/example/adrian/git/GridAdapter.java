@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.adrian.git.Date.Eveniment;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -24,9 +26,9 @@ class GridAdapter extends ArrayAdapter{
     private LayoutInflater mInflater;
     private List <Date> monthlyDates;
     private Calendar currentDate;
-    private List <EventObjects> allEvents;
+    private List <Eveniment> allEvents;
 
-    public GridAdapter(Context context, List<Date> dayValueInCells, Calendar cal, List<EventObjects> mEvents) {
+    public GridAdapter(Context context, List<Date> dayValueInCells, Calendar cal, List<Eveniment> mEvents) {
         super(context,R.layout.single_cell_layout);
         this.monthlyDates = dayValueInCells;
         this.currentDate = cal;
@@ -50,7 +52,7 @@ class GridAdapter extends ArrayAdapter{
             view = mInflater.inflate(R.layout.single_cell_layout, parent, false);
         }
         if (displayMonth == currentMonth && displayYear == currentYear){
-            view.setBackgroundColor(Color.parseColor("##25bfd0"));
+            view.setBackgroundColor(Color.parseColor("#25bfd0"));
         }else{
             view.setBackgroundColor(Color.parseColor("#ededed"));
         }
@@ -63,9 +65,9 @@ class GridAdapter extends ArrayAdapter{
         TextView eventIndicator = (TextView) view.findViewById(R.id.calendar_date_id);
         Calendar eventCalendar = Calendar.getInstance();
         for(int i = 0; i < allEvents.size(); i++){
-            eventCalendar.setTime(allEvents.get(i).getDate());
-            if (dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH) &&
-                    displayMonth == eventCalendar.get(Calendar.MONTH) + 1 &&
+            eventCalendar.setTime(allEvents.get(i).getStartDate());
+            if (dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH)  &&
+                    displayMonth == eventCalendar.get(Calendar.MONTH)  &&
                     displayYear == eventCalendar.get(Calendar.YEAR)){
                 eventIndicator.setBackgroundColor( Color.parseColor("#cffafc"));
             }

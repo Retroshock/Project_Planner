@@ -9,19 +9,19 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class DatabaseObject {
     private static Database dbHelper;
-    private SQLiteDatabase db;
+    private static SQLiteDatabase db;
     public DatabaseObject (Context context) {
         dbHelper = new Database(context);
         dbHelper.getWritableDatabase();
-        this.db = dbHelper.getReadableDatabase();
+        db = dbHelper.getReadableDatabase();
 //        dbHelper.onCreate(this.getDbConnection());
     }
-    public SQLiteDatabase getDbConnection (){
-        return this.db;
+    public static SQLiteDatabase getDbConnection (){
+        return db;
     }
-    public void closeDbConnection(){
-        if (this.db != null)
-            this.db.close();
+    public static void closeDbConnection(){
+        if (db != null)
+            db.close();
     }
 
 }
