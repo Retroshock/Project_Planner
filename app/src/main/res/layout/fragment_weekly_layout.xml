@@ -38,7 +38,7 @@
             android:id="@+id/luniContWeekFrag"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
     <HorizontalScrollView
@@ -61,7 +61,7 @@
             android:id="@+id/martiContWeekFrag"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
     <HorizontalScrollView
@@ -84,7 +84,7 @@
             android:id="@+id/miercuriContWeekFrag"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
     <HorizontalScrollView
@@ -107,7 +107,7 @@
             android:id="@+id/joiContWeekFrag"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
     <HorizontalScrollView
@@ -130,7 +130,7 @@
             android:id="@+id/vineriContWeekFrag"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
     <HorizontalScrollView
@@ -153,7 +153,7 @@
             android:id="@+id/sambataContWeekFrag"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
     <HorizontalScrollView
@@ -176,7 +176,7 @@
             android:id="@+id/duminicaContWeekFrag"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="horizontal" />
     </HorizontalScrollView>
 
     <TextView

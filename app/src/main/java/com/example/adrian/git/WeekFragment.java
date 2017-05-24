@@ -28,8 +28,9 @@ import java.util.Locale;
 
 public class WeekFragment extends Fragment{
 
-    ViewPager pager;
-    public static final String TEST = "test 123";
+    VerticalViewPager pager;
+    public static final String WEEK_START_KEY = "com.example.adrian.git.weekStart";
+    public static final String WEEK_END_KEY = "com.example.adrian.git.weekEnd";
 
     /**
      * Clasa care se ocupa de transmiterea fragmentelor catre ViewPager
@@ -54,7 +55,6 @@ public class WeekFragment extends Fragment{
             f.setArguments(b);
             return f;
              */
-
             Long firstDateInMillis = position * 604800000L + 345600000L;
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date(firstDateInMillis));
@@ -65,12 +65,14 @@ public class WeekFragment extends Fragment{
             ArrayList<Eveniment> events = (ArrayList<Eveniment>)dbq.getAllFutureEvents();
             ArrayList<Eveniment> eventsBundle = new ArrayList<>();
             for (Eveniment ev:events){
-                if (ev.getStartDate().before(cal1.getTime())){
+                if (ev.getStartDate().before(cal1.getTime()) && ev.getStartDate().after(cal.getTime())){
                     eventsBundle.add(ev);
                 } else break;
             }
             Bundle b = new Bundle();
             b.putSerializable(BundleKeys.WEEK_KEY, eventsBundle);
+            b.putSerializable(WEEK_START_KEY, cal);
+            b.putSerializable(WEEK_END_KEY, cal1);
             Fragment f = new WeeklyLayoutFragment();
             f.setArguments(b);
             return f;
@@ -103,7 +105,7 @@ public class WeekFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_week, container, false);
-        pager = (ViewPager) root.findViewById(R.id.pagerWeekFrag);
+        pager = (VerticalViewPager) root.findViewById(R.id.pagerWeekFrag);
         WeeklyPagerAdapter adaptor = new WeeklyPagerAdapter(getChildFragmentManager());
 
         //TODO dupa ce WeeklyPagerAdapter si WeeklyLayoutFragment sunt implementate, decomentez randurile astea
