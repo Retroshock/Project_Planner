@@ -283,4 +283,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/duminicaWeekFrag" />
+
 </android.support.constraint.ConstraintLayout>
