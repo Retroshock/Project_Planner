@@ -28,6 +28,7 @@
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme" />
         <activity android:name=".EventActivity"></activity>
+        <activity android:name=".PickSleepActivity"></activity>
     </application>
 
 </manifest>
