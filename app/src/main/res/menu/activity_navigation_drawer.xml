@@ -17,10 +17,10 @@
             android:icon="@drawable/month"
             android:title="@string/month" />
 
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/logout"
-            android:title="@string/logout" />
+        <!--<item-->
+            <!--android:id="@+id/nav_logout"-->
+            <!--android:icon="@drawable/logout"-->
+            <!--android:title="@string/logout" />-->
     </group>
 
 
