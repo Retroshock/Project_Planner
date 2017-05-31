@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/deleteAddActMn"
+        android:title="@string/delete"
+        app:showAsAction="ifRoom"
+        android:onClick="sterge"/>
+
+    <item
+        android:id="@+id/saveChangesAddActMn"
+        android:title="@string/save_changes"
+        app:showAsAction="ifRoom"
+        android:onClick="salveazaSchimbarile"/>
+</menu>

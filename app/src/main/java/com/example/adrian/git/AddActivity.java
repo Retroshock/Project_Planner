@@ -1,33 +1,26 @@
 package com.example.adrian.git;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.adrian.git.AddActivityFragments.DatePickerFragment;
+import com.example.adrian.git.AddActivityFragments.DurationPickerFragment;
+import com.example.adrian.git.AddActivityFragments.TimePickerFragment;
 import com.example.adrian.git.Date.Eveniment;
 
 import java.text.ParseException;
@@ -50,175 +43,16 @@ public class AddActivity extends AppCompatActivity {
     private int[] end;
     private int[] durata;
     private int[] deadline;
+    private Calendar startCal;
+    private Calendar endCal;
+    private Calendar deadCal;
+    private Eveniment ev;
 
-    private static final String BOOL1 = "com.example.adrian.git.bool1";
-    private static final String BOOL2 = "com.example.adrian.git.bool2";
-    private static final String DATA_KEY = "com.example.adrian.git.data";
-    private static final String DURATA_KEY = "com.example.adrian.git.durata";
-
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
-
-        boolean b1, b2;
-        Bundle b;
-
-        private class MyDatePickerDialog extends DatePickerDialog
-        {
-
-            public MyDatePickerDialog(@NonNull Context context, @Nullable OnDateSetListener listener, int year, int month, int dayOfMonth) {
-                super(context, listener, year, month, dayOfMonth);
-            }
-
-            public void onClick(@NonNull DialogInterface dialog, int which)
-            {
-                if(which == DialogInterface.BUTTON_NEGATIVE)
-                {
-                    ((AddActivity) getActivity()).stergeData(b1, b2);
-                    dialog.cancel();
-                }
-                else
-                    super.onClick(dialog, which);
-            }
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            b = getArguments();
-            b1 = b.getBoolean(BOOL1);
-            b2 = b.getBoolean(BOOL2);
-            int year, month, day;
-            int[] data = b.getIntArray(DATA_KEY);
-            if(data != null)
-            {
-                year = data[0];
-                month = data[1];
-                day = data[2];
-            }
-            else
-            {
-                final Calendar c = Calendar.getInstance();
-                year = c.get(Calendar.YEAR);
-                month = c.get(Calendar.MONTH);
-                day = c.get(Calendar.DAY_OF_MONTH);
-            }
-            return new MyDatePickerDialog(getActivity(), this, year, month, day);
-
-        }
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            ((AddActivity) getActivity()).alegeData(year, month, dayOfMonth, b1, b2, b);
-        }
-    }
-
-    public static class TimePickerFragment extends DialogFragment
-            implements TimePickerDialog.OnTimeSetListener {
-
-        boolean b1, b2;
-
-        private class MyTimePickerDialog extends TimePickerDialog
-        {
-
-            MyTimePickerDialog(Context context, OnTimeSetListener listener, int hourOfDay, int minute, boolean is24HourView) {
-                super(context, listener, hourOfDay, minute, is24HourView);
-            }
-
-            public void onClick(DialogInterface dialog, int which)
-            {
-                if(which == DialogInterface.BUTTON_NEGATIVE)
-                {
-                    ((AddActivity) getActivity()).stergeData(b1, b2);
-                    dialog.cancel();
-                }
-                else
-                    super.onClick(dialog, which);
-            }
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            Bundle b = getArguments();
-            b1 = b.getBoolean(BOOL1);
-            b2 = b.getBoolean(BOOL2);
-            int hour, minute;
-            int[] data = b.getIntArray(DATA_KEY);
-            if(data != null)
-            {
-                hour = data[3];
-                minute = data[4];
-            }
-            else
-            {
-                final Calendar c = Calendar.getInstance();
-                hour = c.get(Calendar.HOUR_OF_DAY);
-                minute = c.get(Calendar.MINUTE);
-            }
-            return new MyTimePickerDialog(getActivity(), this, hour, minute,
-                    DateFormat.is24HourFormat(getActivity()));
-        }
-
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            ((AddActivity) getActivity()).alegeTimpul(hourOfDay, minute, b1, b2);
-        }
-
-    }
-
-    public static class DurationPickerFragment extends DialogFragment
-            implements DialogInterface.OnClickListener {
-
-        private EditText hours;
-        private EditText minutes;
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater inflater = getActivity().getLayoutInflater();
-            View v = inflater.inflate(R.layout.fragment_duration_picker, null);
-            builder.setView(v);
-            hours = (EditText) v.findViewById(R.id.hoursDurationDialFrag);
-            minutes = (EditText) v.findViewById(R.id.minutesDurationDialFrag);
-            Bundle b = getArguments();
-            if(b != null)
-            {
-                int[] durata = b.getIntArray(DURATA_KEY);
-                hours.setText(Integer.toString(durata[0]));
-                minutes.setText(Integer.toString(durata[1]));
-            }
-            return builder.setPositiveButton(R.string.save, this)
-                    .setNegativeButton(R.string.cancel, this)
-                    .create();
-        }
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            switch(which)
-            {
-                case DialogInterface.BUTTON_POSITIVE:
-                {
-                    int ore, minute;
-                    String h = hours.getText().toString();
-                    String m = minutes.getText().toString();
-                    if(h.isEmpty())
-                        ore = 0;
-                    else
-                        ore = Integer.parseInt(h);
-                    if(m.isEmpty())
-                        minute = 0;
-                    else
-                        minute = Integer.parseInt(m);
-                    ((AddActivity) getActivity()).alegeDurata(ore, minute);
-                    break;
-                }
-                case DialogInterface.BUTTON_NEGATIVE:
-                {
-                    ((AddActivity) getActivity()).stergeDurata();
-                    dialog.cancel();
-                    break;
-                }
-            }
-        }
-    }
+    public static final String BOOL1 = "com.example.adrian.git.bool1";
+    public static final String BOOL2 = "com.example.adrian.git.bool2";
+    public static final String DATA_KEY = "com.example.adrian.git.data";
+    public static final String DURATA_KEY = "com.example.adrian.git.durata";
+    public static final String EVT_KEY = "com.example.adrian.git.eveniment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,18 +66,50 @@ public class AddActivity extends AppCompatActivity {
         nota = (EditText) findViewById(R.id.notaAddAct);
         locatie = (EditText) findViewById(R.id.locatieAddAct);
         setSupportActionBar(toolbar);
+        startCal = Calendar.getInstance();
+        endCal = Calendar.getInstance();
+        deadCal = Calendar.getInstance();
+        Intent intent = getIntent();
+        if(intent != null)
+            ev = (Eveniment) intent.getSerializableExtra(EVT_KEY);
+        if(ev != null) {
+            nume.setText(ev.getName());
+            locatie.setText(ev.getLocatie());
+            SimpleDateFormat sdf = new SimpleDateFormat(Strings.DATE_FORMAT, Locale.ENGLISH);
+            stDate.setText(sdf.format(ev.getStartDate()));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(ev.getStartDate());
+            start = new int[5];
+            start[0] = calendar.get(Calendar.YEAR);
+            start[1] = calendar.get(Calendar.MONTH);
+            start[2] = calendar.get(Calendar.DAY_OF_MONTH);
+            start[3] = calendar.get(Calendar.HOUR_OF_DAY);
+            start[4] = calendar.get(Calendar.MINUTE);
+            endDate.setText(sdf.format(ev.getEndDate()));
+            calendar.setTime(ev.getEndDate());
+            end = new int[5];
+            end[0] = calendar.get(Calendar.YEAR);
+            end[1] = calendar.get(Calendar.MONTH);
+            end[2] = calendar.get(Calendar.DAY_OF_MONTH);
+            end[3] = calendar.get(Calendar.HOUR_OF_DAY);
+            end[4] = calendar.get(Calendar.MINUTE);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu m)
     {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_activity_menu, m);
+        if(ev != null)
+            inflater.inflate(R.menu.add_activity_menu_save, m);
+        else
+            inflater.inflate(R.menu.add_activity_menu, m);
         return true;
     }
 
     public void changeType(View v)
     {
+        SimpleDateFormat sdf = new SimpleDateFormat(Strings.DATE_FORMAT, Locale.ENGLISH);
         CheckBox src = (CheckBox) v;
         if(src.isChecked())
         {
@@ -260,9 +126,9 @@ public class AddActivity extends AppCompatActivity {
                 endDate.setText(R.string.end_date2_add_act);
             else
             {
-                String text = "Until " + Integer.toString(deadline[2]) + "." + Integer.toString(deadline[1] + 1)
-                        + "." + Integer.toString(deadline[0]) + " " + Integer.toString(deadline[3])
-                        + ":" + Integer.toString(deadline[4]);
+                String text = "Until ";
+                deadCal.set(deadline[0], deadline[1], deadline[2], deadline[3], deadline[4]);
+                text += sdf.format(deadCal.getTime());
                 endDate.setText(text);
             }
             dinamic = true;
@@ -274,18 +140,18 @@ public class AddActivity extends AppCompatActivity {
                 stDate.setText(R.string.st_date_add_act);
             else
             {
-                String text = "From " + Integer.toString(start[2]) + "." + Integer.toString(start[1] + 1)
-                        + "." + Integer.toString(start[0]) + " " + Integer.toString(start[3])
-                        + ":" + Integer.toString(start[4]);
+                String text = "From ";
+                startCal.set(start[0], start[1], start[2], start[3], start[4]);
+                text += sdf.format(startCal.getTime());
                 stDate.setText(text);
             }
             if(end == null)
                 endDate.setText(R.string.end_date_add_act);
             else
             {
-                String text = "To " + Integer.toString(end[2]) + "." + Integer.toString(end[1] + 1)
-                        + "." + Integer.toString(end[0]) + " " + Integer.toString(end[3])
-                        + ":" + Integer.toString(end[4]);
+                String text = "To ";
+                endCal.set(end[0], end[1], end[2], end[3], end[4]);
+                text += sdf.format(endCal.getTime());
                 endDate.setText(text);
             }
             dinamic = false;
@@ -390,31 +256,41 @@ public class AddActivity extends AppCompatActivity {
 
     public void alegeTimpul(int ore, int minute, boolean b1, boolean b2)
     {
+        SimpleDateFormat sdf = new SimpleDateFormat(Strings.DATE_FORMAT, Locale.ENGLISH);
         if(!b1 && !b2)
         {
             start[3] = ore;
             start[4] = minute;
-            String text = "From " + Integer.toString(start[2]) + "." + Integer.toString(start[1] + 1)
+            String text = "From ";
+            startCal.set(start[0], start[1], start[2], start[3], start[4]);
+            text += sdf.format(startCal.getTime());
+            /*+ Integer.toString(start[2]) + "." + Integer.toString(start[1] + 1)
                     + "." + Integer.toString(start[0]) + " " + Integer.toString(start[3])
-                    + ":" + Integer.toString(start[4]);
+                    + ":" + Integer.toString(start[4]);*/
             stDate.setText(text);
         }
         if(b1 && !b2)
         {
             end[3] = ore;
             end[4] = minute;
-            String text = "To " + Integer.toString(end[2]) + "." + Integer.toString(end[1] + 1)
+            String text = "To ";
+            endCal.set(end[0], end[1], end[2], end[3], end[4]);
+            text += sdf.format(endCal.getTime());
+            /*+ Integer.toString(end[2]) + "." + Integer.toString(end[1] + 1)
                     + "." + Integer.toString(end[0]) + " " + Integer.toString(end[3])
-                    + ":" + Integer.toString(end[4]);
+                    + ":" + Integer.toString(end[4]);*/
             endDate.setText(text);
         }
         if(b1 && b2)
         {
             deadline[3] = ore;
             deadline[4] = minute;
-            String text = "Until " + Integer.toString(deadline[2]) + "." + Integer.toString(deadline[1] + 1)
+            String text = "Until ";
+            deadCal.set(deadline[0], deadline[1], deadline[2], deadline[3], deadline[4]);
+            text += sdf.format(deadCal.getTime());
+            /*+ Integer.toString(deadline[2]) + "." + Integer.toString(deadline[1] + 1)
                     + "." + Integer.toString(deadline[0]) + " " + Integer.toString(deadline[3])
-                    + ":" + Integer.toString(deadline[4]);
+                    + ":" + Integer.toString(deadline[4]);*/
             endDate.setText(text);
         }
     }
@@ -494,4 +370,13 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
+    public void salveazaSchimbarile(MenuItem m)
+    {
+        //TODO salveaza modificarile (pastrate in aceleasi variabile ca pentru salvarea normala)
+    }
+
+    public void sterge(MenuItem m)
+    {
+        //TODO sterge evenimentul ev (pastrat ca variabila cu acest nume)
+    }
 }

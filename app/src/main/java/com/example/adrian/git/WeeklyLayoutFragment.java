@@ -128,8 +128,8 @@ public class WeeklyLayoutFragment extends Fragment {
             iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), EventActivity.class);
-                    intent.putExtra(EventActivity.EVT_KEY, ev);
+                    Intent intent = new Intent(getActivity(), AddActivity.class);
+                    intent.putExtra(AddActivity.EVT_KEY, ev);
                     startActivity(intent);
                 }
             });
