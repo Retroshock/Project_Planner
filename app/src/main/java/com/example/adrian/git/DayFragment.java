@@ -70,7 +70,7 @@ public class DayFragment extends Fragment {
     }
 
     private void previousCalendarDate() {
-        if (eventIndex > 25) {
+        while (eventIndex > 25) {
             mLayout.removeViewAt(eventIndex - 1);
             eventIndex--;
         }
@@ -80,7 +80,7 @@ public class DayFragment extends Fragment {
     }
 
     private void nextCalendarDate() {
-        if (eventIndex > 25) {
+        while (eventIndex > 25) {
             mLayout.removeViewAt(eventIndex - 1);
             eventIndex--;
         }
@@ -90,7 +90,7 @@ public class DayFragment extends Fragment {
     }
 
     private String displayDateInString(Date mDate) {
-        SimpleDateFormat formatter = new SimpleDateFormat("d MMMM, yyyy", Locale.ENGLISH);
+        SimpleDateFormat formatter = new SimpleDateFormat("d MMMM", Locale.ENGLISH);
         return formatter.format(mDate);
     }
 
@@ -101,7 +101,8 @@ public class DayFragment extends Fragment {
             Calendar day = Calendar.getInstance();
             day.setTime(eObject.getStartDate());
 
-            if (day.get(Calendar.DAY_OF_MONTH) == cal.get(Calendar.DAY_OF_MONTH)) {
+            if (day.get(Calendar.DAY_OF_MONTH) == cal.get(Calendar.DAY_OF_MONTH) &&
+                    day.get(Calendar.MONTH) == cal.get(Calendar.MONTH)) {
                 Date eventDate = eObject.getStartDate();
                 Date endDate = eObject.getEndDate();
                 Calendar calendar = Calendar.getInstance();
@@ -116,7 +117,7 @@ public class DayFragment extends Fragment {
                     int eventBlockHeight = getEventTimeFrame(eventDate, endDate);
                     displayEventSection(eventDate, eventBlockHeight, eventMessage);
                 }
-            } else break;
+            }
         }
     }
 
