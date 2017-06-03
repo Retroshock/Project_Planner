@@ -1,6 +1,10 @@
 package com.example.adrian.git;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +31,7 @@ import java.util.Locale;
  * Created by Adrian on 08.04.2017.
  */
 
-public class CalendarCustomView extends LinearLayout {
+public class CalendarCustomView extends LinearLayout{
 
     private static final String TAG = CalendarCustomView.class.getSimpleName();
     private ImageView previousButton, nextButton;
@@ -77,8 +81,9 @@ public class CalendarCustomView extends LinearLayout {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Date dateAtPosition = getDateAtPosition(position);
-                String eventName = getEventNameAtDate(dateAtPosition);
-                Toast.makeText(context, eventName, Toast.LENGTH_SHORT).show();
+                MonthToDay.date = dateAtPosition;
+                FragmentManager fragmentManager = MonthToDay.navActivity.getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new DayFragment()).commit();
             }
         });
     }
@@ -101,6 +106,7 @@ public class CalendarCustomView extends LinearLayout {
         return dayValueInCells.get(position);
     }
 
+
     private void setPreviousButtonClickEvent() {
         previousButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -120,7 +126,7 @@ public class CalendarCustomView extends LinearLayout {
         //List <EventObjects> mEvents = new ArrayList<>();
         Calendar mCal = (Calendar)cal.clone();
         mCal.set(Calendar.DAY_OF_MONTH, 1);
-        int firstDayOfTheMonth = mCal.get(Calendar.DAY_OF_WEEK) -2 ;
+        int firstDayOfTheMonth = mCal.get(Calendar.DAY_OF_WEEK) - 2 ;
         mCal.add(Calendar.DAY_OF_MONTH, -firstDayOfTheMonth);
         while (dayValueInCells.size() < MAX_CALENDAR_COLUMN){
             dayValueInCells.add(mCal.getTime());

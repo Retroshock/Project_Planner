@@ -68,7 +68,8 @@ class GridAdapter extends ArrayAdapter{
             eventCalendar.setTime(allEvents.get(i).getStartDate());
             if (dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH)  &&
                     displayMonth == eventCalendar.get(Calendar.MONTH)  &&
-                    displayYear == eventCalendar.get(Calendar.YEAR)){
+                    displayYear == eventCalendar.get(Calendar.YEAR)
+                    && !allEvents.get(i).getName().equals("SLEEP")){
                 eventIndicator.setBackgroundColor( Color.parseColor("#cffafc"));
             }
         }

@@ -26,7 +26,7 @@ import java.util.Locale;
  */
 
 public class DayFragment extends Fragment {
-
+    private Date currDateInDate = MonthToDay.date;
     private ImageView previousDay;
     private ImageView nextDay;
     private TextView currentDate;
@@ -36,6 +36,7 @@ public class DayFragment extends Fragment {
     private int eventIndex;
     View myView;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,7 +45,12 @@ public class DayFragment extends Fragment {
         mLayout = (RelativeLayout) myView.findViewById(R.id.left_event_column);
         eventIndex = mLayout.getChildCount();
         currentDate = (TextView) myView.findViewById(R.id.day_number);
-        currentDate.setText(displayDateInString(cal.getTime()));
+        if (currDateInDate == null)
+            currentDate.setText(displayDateInString(cal.getTime()));
+        else {
+            currentDate.setText(displayDateInString(currDateInDate));
+            cal.setTime(currDateInDate);
+        }
         displayDailyEvents();
         previousDay = (ImageView) myView.findViewById(R.id.previous_day);
         nextDay = (ImageView) myView.findViewById(R.id.next_day);
@@ -64,14 +70,20 @@ public class DayFragment extends Fragment {
     }
 
     private void previousCalendarDate() {
-        mLayout.removeViewAt(eventIndex - 1);
+        if (eventIndex > 25) {
+            mLayout.removeViewAt(eventIndex - 1);
+            eventIndex--;
+        }
         cal.add(Calendar.DAY_OF_MONTH, -1);
         currentDate.setText(displayDateInString(cal.getTime()));
         displayDailyEvents();
     }
 
     private void nextCalendarDate() {
-        mLayout.removeViewAt(eventIndex - 1);
+        if (eventIndex > 25) {
+            mLayout.removeViewAt(eventIndex - 1);
+            eventIndex--;
+        }
         cal.add(Calendar.DAY_OF_MONTH, 1);
         currentDate.setText(displayDateInString(cal.getTime()));
         displayDailyEvents();
@@ -142,7 +154,8 @@ public class DayFragment extends Fragment {
         mEventView.setTextColor(Color.parseColor("#ffffff"));
         mEventView.setText(message);
         mEventView.setBackgroundColor(Color.parseColor("#3F51B5"));
-        mLayout.addView(mEventView, eventIndex - 1);
+        mLayout.addView(mEventView, eventIndex);
+        eventIndex++;
     }
 
 }
