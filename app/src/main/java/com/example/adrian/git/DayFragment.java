@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.example.adrian.git.Date.Eveniment;
 
+import org.joda.time.Period;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -98,39 +100,44 @@ public class DayFragment extends Fragment {
         Date calendarDate = cal.getTime();
         List<Eveniment> dailyEvent = mQuery.getAllFutureEvents();
         for (Eveniment eObject : dailyEvent) {
-            Calendar day = Calendar.getInstance();
-            day.setTime(eObject.getStartDate());
+            if (!eObject.getName().equals("SLEEP")) {
+                Calendar day = Calendar.getInstance();
+                day.setTime(eObject.getStartDate());
 
-            if (day.get(Calendar.DAY_OF_MONTH) == cal.get(Calendar.DAY_OF_MONTH) &&
-                    day.get(Calendar.MONTH) == cal.get(Calendar.MONTH)) {
-                Date eventDate = eObject.getStartDate();
-                Date endDate = eObject.getEndDate();
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(endDate);
-                if (calendar.get(Calendar.DAY_OF_MONTH) != day.get(Calendar.DAY_OF_MONTH)) {
-                    String eventMessage = eObject.getName();
-                    calendar.set(Calendar.HOUR_OF_DAY, 24);
-                    int eventBlockHeight = getEventTimeFrame(eventDate, calendar.getTime());
-                    displayEventSection(eventDate, eventBlockHeight, eventMessage);
-                } else {
-                    String eventMessage = eObject.getName();
-                    int eventBlockHeight = getEventTimeFrame(eventDate, endDate);
-                    displayEventSection(eventDate, eventBlockHeight, eventMessage);
+                if (day.get(Calendar.DAY_OF_MONTH) == cal.get(Calendar.DAY_OF_MONTH) &&
+                        day.get(Calendar.MONTH) == cal.get(Calendar.MONTH)) {
+                    Date eventDate = eObject.getStartDate();
+                    Date endDate = eObject.getEndDate();
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(endDate);
+                    if (calendar.get(Calendar.DAY_OF_MONTH) != day.get(Calendar.DAY_OF_MONTH)) {
+                        String eventMessage = eObject.getName();
+                        calendar.set(Calendar.HOUR_OF_DAY, 24);
+                        int eventBlockHeight = getEventTimeFrame(eventDate, calendar.getTime());
+                        //TODO aici, in displayEventSection e partea care iti creeaza casuta cu evenimentul
+                        displayEventSection(eventDate, eventBlockHeight, eventMessage);
+                    } else {
+                        String eventMessage = eObject.getName();
+                        int eventBlockHeight = getEventTimeFrame(eventDate, endDate);
+                        displayEventSection(eventDate, eventBlockHeight, eventMessage);
+                    }
                 }
             }
         }
     }
 
     private int getEventTimeFrame(Date start, Date end) {
-        long timeDifference = end.getTime() - start.getTime();
-        Calendar mCal = Calendar.getInstance();
-        mCal.setTimeInMillis(timeDifference);
-        int hours = mCal.get(Calendar.HOUR);
-        int minutes = mCal.get(Calendar.MINUTE);
-        return (hours * 60) + ((minutes * 60) / 100);
+        //long timeDifference = end.getTime() - start.getTime();
+        // TODO aici teoretic incepe gasirea diferentei de timp intre startdate si endDate
+        long secs = (end.getTime() - start.getTime()) / 1000;
+        int hours = (int)secs / 3600;
+        secs = secs % 1000;
+        int mins = (int)secs % 60;
+        return (hours * 60) + (( mins * 60) / 100);
     }
 
     private void displayEventSection(Date eventDate, int height, String message) {
+
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         String displayValue = timeFormatter.format(eventDate);
         String[] hourMinutes = displayValue.split(":");
@@ -138,11 +145,12 @@ public class DayFragment extends Fragment {
         int minutes = Integer.parseInt(hourMinutes[1]);
 
         int topViewMargin = (hours * 60) + ((minutes * 60) / 100);
-
+        //TODO Aici in createEventView teoretic se deseneaza evenimentul >
         createEventView(topViewMargin, height, message);
     }
 
     private void createEventView(int topMargin, int height, String message) {
+        //TODO aici se deseneaza efectiv ...
         TextView mEventView = new TextView(getActivity());
         RelativeLayout.LayoutParams lParam = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lParam.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -156,6 +164,8 @@ public class DayFragment extends Fragment {
         mEventView.setText(message);
         mEventView.setBackgroundColor(Color.parseColor("#3F51B5"));
         mLayout.addView(mEventView, eventIndex);
+
+        //Nu te juca cu eventIndexul asta :D
         eventIndex++;
     }
 
