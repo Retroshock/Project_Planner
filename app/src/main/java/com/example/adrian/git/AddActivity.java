@@ -343,18 +343,24 @@ public class AddActivity extends AppCompatActivity {
         nume - getText().toString(), verificare sa nu fie gol
         nota, locatie - la fel ca nume, dar probabil optionale
         */
-        Eveniment ev;
-        if (dinamic)
+
+        if (dinamic) {
+            EvenimentDinamic ev;
             ev = new EvenimentDinamic();
-        else
+            //ev.setDuration();
+        }
+        else {
+            Eveniment ev;
             ev = new Eveniment();
-        ev.setStartDate(convertArrToDateStr(start));
-        ev.setEndDate(convertArrToDateStr(end));
-        ev.setName(nume.getText().toString());
-        ev.setID(IDGen.idCurent);
-        ev.setLocatie(locatie.getText().toString());
-        AddEventToDatabase.add(ev, this);
-        Toast.makeText(this, "Eveniment " + ev.getName() + " Adaugat", Toast.LENGTH_SHORT).show();
+            ev.setStartDate(convertArrToDateStr(start));
+            ev.setEndDate(convertArrToDateStr(end));
+            ev.setName(nume.getText().toString());
+            ev.setID(IDGen.idCurent);
+            ev.setLocatie(locatie.getText().toString());
+            AddEventToDatabase.add(ev, this);
+            Toast.makeText(this, "Eveniment " + ev.getName() + " Adaugat", Toast.LENGTH_SHORT).show();
+        }
+
         finish();
     }
 
@@ -378,10 +384,33 @@ public class AddActivity extends AppCompatActivity {
     public void salveazaSchimbarile(MenuItem m)
     {
         //TODO salveaza modificarile (pastrate in aceleasi variabile ca pentru salvarea normala)
+        Eveniment ev;
+        ev = new Eveniment();
+        ev.setStartDate(convertArrToDateStr(start));
+        ev.setEndDate(convertArrToDateStr(end));
+        ev.setName(nume.getText().toString());
+        ev.setID(IDGen.idCurent);
+        ev.setLocatie(locatie.getText().toString());
+        String[] arg = {ev.getName()};
+        DatabaseObject.getDbConnection().delete("evenimente","nume = ?" , arg);
+        AddEventToDatabase.add(ev, this);
+        Toast.makeText(this, "Evenimentul " + ev.getName() + " modificat", Toast.LENGTH_SHORT).show();
+
+        finish();
     }
 
     public void sterge(MenuItem m)
     {
         //TODO sterge evenimentul ev (pastrat ca variabila cu acest nume)
+        Eveniment ev;
+        ev = new Eveniment();
+        ev.setStartDate(convertArrToDateStr(start));
+        ev.setEndDate(convertArrToDateStr(end));
+        ev.setName(nume.getText().toString());
+        ev.setID(IDGen.idCurent);
+        ev.setLocatie(locatie.getText().toString());
+        String[] arg = {ev.getName()};
+        DatabaseObject.getDbConnection().delete("evenimente","nume = ?" , arg);
+        finish();
     }
 }

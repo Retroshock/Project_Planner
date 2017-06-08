@@ -11,7 +11,7 @@ import javax.xml.datatype.Duration;
 
 public class EvenimentDinamic extends Eveniment {
 
-    private Duration duration ;
+    private Duration duration;
 
     private Date deadline;
 

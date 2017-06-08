@@ -8,17 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.example.adrian.git.Tests.TestDB;
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -47,6 +43,8 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
                 .addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions).build();
 
         DatabaseObject BD = new DatabaseObject(getApplicationContext());
+        TestDB testDB = new TestDB();
+        testDB.TestDB();
         IDGen.setIdCurent();
     }
 

@@ -19,6 +19,45 @@ android {
     }
     productFlavors {
     }
+    defaultConfig {
+        // Specifies the application ID for the test APK.
+        testApplicationId "com.test.foo"
+        // Specifies the fully-qualified class name of the test instrumentation runner.
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
+        // If set to 'true', enables the instrumentation class to start and stop profiling.
+        // If set to false (default), profiling occurs the entire time the instrumentation
+        // class is running.
+        testHandleProfiling true
+        // If set to 'true', indicates that the Android system should run the instrumentation
+        // class as a functional test. The default value is 'false'
+        testFunctionalTest true
+    }
+
+    testOptions {
+        unitTests {
+            // By default, unit tests throw an exception any time the code you are testing tries to access
+            // Android platform APIs (unless you mock Android dependencies yourself or with a testing
+            // framework like Mockito). However, you can enable the following property so that the test
+            // returns either null or zero when accessing platform APIs, rather than throwing an exception.
+
+
+            // Encapsulates options for controlling how Gradle executes unit tests. For a list
+            // of all the options you can specify, read Gradle's reference documentation.
+            all {
+                // Sets JVM argument(s) for the test JVM(s).
+                jvmArgs '-XX:MaxPermSize=256m'
+
+                // You can also check the task name to apply options to only the tests you specify.
+                if (it.name == 'testDebug') {
+                    systemProperty 'debug', 'true'
+                }
+
+                if (it.name == 'connectedDebugAndroidTest') {
+                }
+            }
+        }
+
+    }
 }
 
 dependencies {
@@ -38,6 +77,6 @@ dependencies {
     compile 'joda-time:joda-time:2.9.4'
     compile 'com.android.support:support-v13:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
-    testCompile 'junit:junit:4.12'
+    debugCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'
