@@ -129,22 +129,38 @@ public class DayFragment extends Fragment {
     private int getEventTimeFrame(Date start, Date end) {
         //long timeDifference = end.getTime() - start.getTime();
         // TODO aici teoretic incepe gasirea diferentei de timp intre startdate si endDate
-        long secs = (end.getTime() - start.getTime()) / 1000;
+        /*long secs = (end.getTime() - start.getTime()) / 1000;
         int hours = (int)secs / 3600;
         secs = secs % 1000;
-        int mins = (int)secs % 60;
-        return (hours * 60) + (( mins * 60) / 100);
+        int mins = (int)secs % 60;*/
+        Calendar startCal = Calendar.getInstance();
+        startCal.setTime(start);
+        Calendar endCal = Calendar.getInstance();
+        endCal.setTime(end);
+        int hours = endCal.get(Calendar.HOUR_OF_DAY) - startCal.get(Calendar.HOUR_OF_DAY);
+        int minEnd = endCal.get(Calendar.MINUTE);
+        int minStart = startCal.get(Calendar.MINUTE);
+        if(minEnd < minStart) {
+            hours--;
+            minEnd += 60;
+        }
+        int mins = minEnd - minStart;
+        return hours * 60 +  mins;
     }
 
     private void displayEventSection(Date eventDate, int height, String message) {
 
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+        /*SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         String displayValue = timeFormatter.format(eventDate);
         String[] hourMinutes = displayValue.split(":");
         int hours = Integer.parseInt(hourMinutes[0]);
-        int minutes = Integer.parseInt(hourMinutes[1]);
+        int minutes = Integer.parseInt(hourMinutes[1]);*/
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(eventDate);
+        int hours = cal.get(Calendar.HOUR_OF_DAY);
+        int minutes = cal.get(Calendar.MINUTE);
 
-        int topViewMargin = (hours * 60) + ((minutes * 60) / 100);
+        int topViewMargin = hours * 60 + minutes;
         //TODO Aici in createEventView teoretic se deseneaza evenimentul >
         createEventView(topViewMargin, height, message);
     }
@@ -154,11 +170,11 @@ public class DayFragment extends Fragment {
         TextView mEventView = new TextView(getActivity());
         RelativeLayout.LayoutParams lParam = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lParam.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        lParam.topMargin = topMargin * 2;
+        lParam.topMargin = Math.round(topMargin * getResources().getDisplayMetrics().density);
         lParam.leftMargin = 24;
         mEventView.setLayoutParams(lParam);
         mEventView.setPadding(24, 0, 24, 0);
-        mEventView.setHeight(height * 2);
+        mEventView.setHeight(Math.round(height * getResources().getDisplayMetrics().density));
         mEventView.setGravity(0x11);
         mEventView.setTextColor(Color.parseColor("#ffffff"));
         mEventView.setText(message);
