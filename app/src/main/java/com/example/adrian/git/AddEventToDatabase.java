@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import com.example.adrian.git.Date.Eveniment;
 import com.example.adrian.git.Date.EvenimentDinamic;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -21,11 +22,12 @@ public class AddEventToDatabase {
     public AddEventToDatabase(){
 
     }
-    public static void add(Eveniment eveniment){
+    public static void add(Eveniment eveniment, Context context){
         db = DatabaseObject.getDbConnection();
 
         if (eveniment instanceof EvenimentDinamic){
             //TODO cod pentru tratat de evenimente dinamice
+            MergeEvents.divideEvent(eveniment, (ArrayList<Eveniment>) new DatabaseQuery(context).getAllFutureEvents());
         }
         else{
             String query;

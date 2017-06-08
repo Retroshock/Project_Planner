@@ -22,6 +22,7 @@ import com.example.adrian.git.AddActivityFragments.DatePickerFragment;
 import com.example.adrian.git.AddActivityFragments.DurationPickerFragment;
 import com.example.adrian.git.AddActivityFragments.TimePickerFragment;
 import com.example.adrian.git.Date.Eveniment;
+import com.example.adrian.git.Date.EvenimentDinamic;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -342,13 +343,17 @@ public class AddActivity extends AppCompatActivity {
         nume - getText().toString(), verificare sa nu fie gol
         nota, locatie - la fel ca nume, dar probabil optionale
         */
-        Eveniment ev = new Eveniment();
+        Eveniment ev;
+        if (dinamic)
+            ev = new EvenimentDinamic();
+        else
+            ev = new Eveniment();
         ev.setStartDate(convertArrToDateStr(start));
         ev.setEndDate(convertArrToDateStr(end));
         ev.setName(nume.getText().toString());
         ev.setID(IDGen.idCurent);
-        //ev.setLocatie();
-        AddEventToDatabase.add(ev);
+        ev.setLocatie(locatie.getText().toString());
+        AddEventToDatabase.add(ev, this);
         Toast.makeText(this, "Eveniment " + ev.getName() + " Adaugat", Toast.LENGTH_SHORT).show();
         finish();
     }

@@ -1,10 +1,14 @@
 package com.example.adrian.git;
 
+import android.database.Cursor;
+
 import com.example.adrian.git.Date.Constants;
 import com.example.adrian.git.Date.Eveniment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Robert Iacob on 22.04.2017.
@@ -12,18 +16,18 @@ import java.util.Date;
 
 public class MergeEvents  {
 
-    private ArrayList <Eveniment> freeTime;
-    private ArrayList <Eveniment> mergeArray;
-    private ArrayList <Eveniment> storeAccEvent;
-    private long sumFreeTime;
+    private static ArrayList <Eveniment> freeTime;
+    private static ArrayList <Eveniment> mergeArray;
+    private static ArrayList <Eveniment> storeAccEvent;
+    private static long sumFreeTime;
 
-    private void detFreeTime(ArrayList <Eveniment> dbEvents){
+    private static void detFreeTime(ArrayList <Eveniment> dbEvents){
         Eveniment start, tempEvent;
         start = dbEvents.get(0);
         freeTime = new ArrayList<>();
 
         for(int i = 1; i < dbEvents.size(); i++){
-            if(timeDifference(start, dbEvents.get(i))> Constants.TWO_HOURS){
+            if(Math.abs(timeDifference(start, dbEvents.get(i)))> Constants.TWO_HOURS){
                 tempEvent = new Eveniment();
                 tempEvent.setStartDate(start.getEndDate());
                 tempEvent.setEndDate(dbEvents.get(i).getStartDate());
@@ -38,16 +42,23 @@ public class MergeEvents  {
         }
     }
 
-    private long timeDifference(Eveniment start, Eveniment eveniment) {
+    private static long timeDifference(Eveniment start, Eveniment eveniment) {
         return eveniment.getStartDate().getTime() - start.getEndDate().getTime();
     }
 
-    public long divideAlgorithm(long eventDuration){
+    public static long divideAlgorithm(long eventDuration){
         long tempDuration, restStartTime, eventDivision;
         storeAccEvent = new ArrayList<>();
 
         if(eventDuration < Constants.TWO_HOURS){
             //TODO add in baza de date
+            Eveniment eveniment = freeTime.get(0);
+            SimpleDateFormat sdf = new SimpleDateFormat(Strings.DATE_FORMAT, Locale.ENGLISH);
+            String query = "INSERT INTO evenimente ( nume, startDate, endDate, id, locatie )" +
+                    " VALUES ( '" + eveniment.getName() + "' , '" + sdf.format(eveniment.getStartDate()) + "' , '" +
+                    sdf.format(eveniment.getEndDate()) + "' , " + String.valueOf(eveniment.getID()) +
+                    ", '" +  " ' );" ;
+            DatabaseObject.getDbConnection().execSQL(query);
             storeAccEvent.add(freeTime.get(0));
             freeTime.get(0).setStartDate(new Date(eventDuration));
         }
@@ -84,10 +95,11 @@ public class MergeEvents  {
         return eventDuration;
     }
 
-    public void divideEvent(Eveniment event, ArrayList<Eveniment> dbEvents){
+    public static void divideEvent(Eveniment event, ArrayList<Eveniment> dbEvents){
         detFreeTime(dbEvents);
         long eventDuration;
         eventDuration = event.getEndDate().getTime() - event.getStartDate().getTime();
         divideAlgorithm(eventDuration);
+
     }
 }
